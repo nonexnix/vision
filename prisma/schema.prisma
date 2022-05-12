@@ -1,0 +1,263 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  firstName String
+  lastName  String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  members   Member[]
+  tickets   Ticket[]
+}
+
+model Member {
+  id             String          @id @default(cuid())
+  creator        Boolean
+  leader         Boolean
+  rating         Int             @default(100)
+  active         Boolean         @default(true)
+  user           User            @relation(fields: [userId], references: [id])
+  userId         String
+  project        Project         @relation(fields: [projectId], references: [id])
+  projectId      String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  authorizations Authorization[]
+  messages       Message[]
+  reactions      Reaction[]
+  tasks          Task[]
+  todos          Todo[]
+  suggestions    Suggestion[]
+  files          File[]
+  announcements  Announcement[]
+  participants   Participant[]
+
+  @@unique([userId, projectId])
+}
+
+model Project {
+  id            String         @id @default(cuid())
+  name          String
+  description   String
+  code          String         @unique
+  secured       Boolean        @default(true)
+  over          Boolean        @default(false)
+  perserve      Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  dueAt         DateTime?
+  members       Member[]
+  roles         Role[]
+  messages      Message[]
+  tasks         Task[]
+  suggestions   Suggestion[]
+  files         File[]
+  announcements Announcement[]
+  tickets       Ticket[]
+}
+
+model Ticket {
+  id        String  @id @default(cuid())
+  code      String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+
+  @@unique([userId, projectId])
+}
+
+model Role {
+  id             String          @id @default(cuid())
+  name           String
+  description    String
+  project        Project         @relation(fields: [projectId], references: [id])
+  projectId      String
+  permission     Permission      @relation(fields: [permissionId], references: [id])
+  permissionId   String          @unique
+  authorizations Authorization[]
+}
+
+// Permission to become a creator
+// Creator have access to all modifications
+model Permission {
+  id           String  @id @default(cuid())
+  project      Boolean @default(false)
+  message      Boolean @default(true)
+  task         Boolean @default(false)
+  todo         Boolean @default(true)
+  suggestion   Boolean @default(true)
+  file         Boolean @default(true)
+  announcement Boolean @default(false)
+  ticket       Boolean @default(false)
+  role         Role?
+}
+
+model Authorization {
+  id       String  @id @default(cuid())
+  member   Member? @relation(fields: [memberId], references: [id])
+  memberId String?
+  role     Role    @relation(fields: [roleId], references: [id])
+  roleId   String
+
+  @@unique([roleId, memberId])
+}
+
+model Message {
+  id        String     @id @default(cuid())
+  text      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  member    Member     @relation(fields: [memberId], references: [id])
+  memberId  String
+  project   Project    @relation(fields: [projectId], references: [id])
+  projectId String
+  reactions Reaction[]
+}
+
+model Reaction {
+  id        String  @id @default(cuid())
+  emoji     Emoji   @default(LIKE)
+  member    Member  @relation(fields: [memberId], references: [id])
+  memberId  String
+  message   Message @relation(fields: [messageId], references: [id])
+  messageId String
+
+  @@unique([emoji, messageId, memberId])
+}
+
+model Task {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  rate         Int           @default(10)
+  over         Boolean       @default(false)
+  priority     Priority      @default(MEDIUM)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  dueAt        DateTime?
+  member       Member        @relation(fields: [memberId], references: [id])
+  memberId     String
+  project      Project       @relation(fields: [projectId], references: [id])
+  projectId    String
+  todos        Todo[]
+  participants Participant[]
+}
+
+model Todo {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  rate         Int           @default(2)
+  over         Boolean       @default(false)
+  priority     Priority      @default(MEDIUM)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  dueAt        DateTime?
+  member       Member        @relation(fields: [memberId], references: [id])
+  memberId     String
+  task         Task          @relation(fields: [taskId], references: [id])
+  taskId       String
+  participants Participant[]
+}
+
+model Suggestion {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  rate         Int           @default(5)
+  status       Status        @default(PENDING)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  member       Member        @relation(fields: [memberId], references: [id])
+  memberId     String
+  project      Project       @relation(fields: [projectId], references: [id])
+  projectId    String
+  participants Participant[]
+}
+
+model File {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  extension    String
+  path         String
+  rate         Int           @default(5)
+  status       Status        @default(PENDING)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  member       Member        @relation(fields: [memberId], references: [id])
+  memberId     String
+  project      Project       @relation(fields: [projectId], references: [id])
+  projectId    String
+  participants Participant[]
+}
+
+model Announcement {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  member       Member        @relation(fields: [memberId], references: [id])
+  memberId     String
+  project      Project       @relation(fields: [projectId], references: [id])
+  projectId    String
+  participants Participant[]
+}
+
+model Participant {
+  id             String        @id @default(cuid())
+  member         Member        @relation(fields: [memberId], references: [id])
+  memberId       String
+  task           Task?         @relation(fields: [taskId], references: [id])
+  taskId         String?
+  todo           Todo?         @relation(fields: [todoId], references: [id])
+  todoId         String?
+  suggestion     Suggestion?   @relation(fields: [suggestionId], references: [id])
+  suggestionId   String?
+  file           File?         @relation(fields: [fileId], references: [id])
+  fileId         String?
+  announcement   Announcement? @relation(fields: [announcementId], references: [id])
+  announcementId String?
+
+  @@unique([memberId, taskId])
+  @@unique([memberId, todoId])
+  @@unique([memberId, suggestionId])
+  @@unique([memberId, fileId])
+  @@unique([memberId, announcementId])
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  DECLINED
+}
+
+enum Emoji {
+  LIKE
+  LOVE
+  HATE
+  LAUGH
+  CRY
+  HAPPY
+  SAD
+}

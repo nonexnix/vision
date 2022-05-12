@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync": "prisma db push",
+    "studio": "prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^3.14.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0"
@@ -19,6 +22,7 @@
     "@types/react-dom": "18.0.3",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
+    "prisma": "^3.14.0",
     "typescript": "4.6.4"
   }
 }
