@@ -30,9 +30,9 @@ model Member {
   active         Boolean         @default(true)
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  user           User            @relation(fields: [userId], references: [id])
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String
-  project        Project         @relation(fields: [projectId], references: [id])
+  project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId      String
   authorizations Authorization[]
   messages       Message[]
@@ -57,7 +57,7 @@ model Project {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   dueAt         DateTime?
-  user          User           @relation(fields: [userId], references: [id])
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
   members       Member[]
   roles         Role[]
@@ -72,9 +72,9 @@ model Project {
 model Ticket {
   id        String  @id @default(cuid())
   code      String
-  user      User    @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
-  project   Project @relation(fields: [projectId], references: [id])
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
 
   @@unique([userId, projectId])
@@ -84,9 +84,9 @@ model Role {
   id             String          @id @default(cuid())
   name           String
   description    String
-  project        Project         @relation(fields: [projectId], references: [id])
+  project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId      String
-  permission     Permission      @relation(fields: [permissionId], references: [id])
+  permission     Permission      @relation(fields: [permissionId], references: [id], onDelete: Cascade)
   permissionId   String          @unique
   authorizations Authorization[]
 }
@@ -108,9 +108,9 @@ model Permission {
 
 model Authorization {
   id       String  @id @default(cuid())
-  member   Member? @relation(fields: [memberId], references: [id])
+  member   Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId String?
-  role     Role    @relation(fields: [roleId], references: [id])
+  role     Role    @relation(fields: [roleId], references: [id], onDelete: Cascade)
   roleId   String
 
   @@unique([roleId, memberId])
@@ -121,9 +121,9 @@ model Message {
   text      String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  member    Member     @relation(fields: [memberId], references: [id])
+  member    Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId  String
-  project   Project    @relation(fields: [projectId], references: [id])
+  project   Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
   reactions Reaction[]
 }
@@ -131,9 +131,9 @@ model Message {
 model Reaction {
   id        String  @id @default(cuid())
   emoji     Emoji   @default(LIKE)
-  member    Member  @relation(fields: [memberId], references: [id])
+  member    Member  @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId  String
-  message   Message @relation(fields: [messageId], references: [id])
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
   messageId String
 
   @@unique([emoji, messageId, memberId])
@@ -149,9 +149,9 @@ model Task {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   dueAt        DateTime?
-  member       Member        @relation(fields: [memberId], references: [id])
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId     String
-  project      Project       @relation(fields: [projectId], references: [id])
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId    String
   todos        Todo[]
   participants Participant[]
@@ -167,9 +167,9 @@ model Todo {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   dueAt        DateTime?
-  member       Member        @relation(fields: [memberId], references: [id])
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId     String
-  task         Task          @relation(fields: [taskId], references: [id])
+  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId       String
   participants Participant[]
 }
@@ -182,9 +182,9 @@ model Suggestion {
   status       Status        @default(PENDING)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  member       Member        @relation(fields: [memberId], references: [id])
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId     String
-  project      Project       @relation(fields: [projectId], references: [id])
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId    String
   participants Participant[]
 }
@@ -199,9 +199,9 @@ model File {
   status       Status        @default(PENDING)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  member       Member        @relation(fields: [memberId], references: [id])
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId     String
-  project      Project       @relation(fields: [projectId], references: [id])
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId    String
   participants Participant[]
 }
@@ -212,26 +212,26 @@ model Announcement {
   description  String
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  member       Member        @relation(fields: [memberId], references: [id])
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId     String
-  project      Project       @relation(fields: [projectId], references: [id])
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId    String
   participants Participant[]
 }
 
 model Participant {
   id             String        @id @default(cuid())
-  member         Member        @relation(fields: [memberId], references: [id])
+  member         Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId       String
-  task           Task?         @relation(fields: [taskId], references: [id])
+  task           Task?         @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId         String?
-  todo           Todo?         @relation(fields: [todoId], references: [id])
+  todo           Todo?         @relation(fields: [todoId], references: [id], onDelete: Cascade)
   todoId         String?
-  suggestion     Suggestion?   @relation(fields: [suggestionId], references: [id])
+  suggestion     Suggestion?   @relation(fields: [suggestionId], references: [id], onDelete: Cascade)
   suggestionId   String?
-  file           File?         @relation(fields: [fileId], references: [id])
+  file           File?         @relation(fields: [fileId], references: [id], onDelete: Cascade)
   fileId         String?
-  announcement   Announcement? @relation(fields: [announcementId], references: [id])
+  announcement   Announcement? @relation(fields: [announcementId], references: [id], onDelete: Cascade)
   announcementId String?
 
   @@unique([memberId, taskId])
