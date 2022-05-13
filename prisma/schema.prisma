@@ -108,10 +108,10 @@ model Permission {
 }
 
 model Authorization {
-  id       String  @id @default(cuid())
-  member   Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
-  memberId String?
-  role     Role    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  id       String @id @default(cuid())
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId String
+  role     Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
   roleId   String
 
   @@unique([roleId, memberId])
