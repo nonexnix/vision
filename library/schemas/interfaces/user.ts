@@ -8,8 +8,8 @@ interface IUser {
   username: string
   firstName: string
   lastName: string
-  createdAt: string
-  updatedAt: string
+  createdAt: string | Date
+  updatedAt: string | Date
   members?: IMember[]
   projects?: IProject[]
   tickets?: ITicket[]

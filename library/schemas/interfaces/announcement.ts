@@ -6,8 +6,8 @@ interface IAnnouncement {
   id: string
   name: string
   description: string
-  createdAt: string
-  updatedAt: string
+  createdAt: string | Date
+  updatedAt: string | Date
   member?: IMember
   memberId: string
   project?: IProject

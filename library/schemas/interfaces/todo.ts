@@ -10,8 +10,8 @@ interface ITodo {
   rate: number
   priority: TStatus
   over: number
-  createdAt: string
-  updatedAt: string
+  createdAt: string | Date
+  updatedAt: string | Date
   dueAt: string
   member?: IMember
   memberId: string

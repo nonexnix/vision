@@ -15,9 +15,9 @@ interface IProject {
   code: string
   preserve: boolean
   over: boolean
-  createdAt: string
-  updatedAt: string
-  dueAt: string
+  createdAt: string | Date
+  updatedAt: string | Date
+  dueAt: string | Date
   user?: IUser
   userId: string
   members?: IMember[]

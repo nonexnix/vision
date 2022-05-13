@@ -9,8 +9,8 @@ interface ISuggestion {
   description: string
   rate: number
   status: TStatus
-  createdAt: string
-  updatedAt: string
+  createdAt: string | Date
+  updatedAt: string | Date
   member?: IMember
   memberId: string
   project?: IProject

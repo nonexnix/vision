@@ -10,8 +10,8 @@ interface ITask {
   rate: number
   priority: any
   over: boolean
-  createdAt: string
-  updatedAt: string
+  createdAt: string | Date
+  updatedAt: string | Date
   dueAt: string
   member?: IMember
   memberId: string
