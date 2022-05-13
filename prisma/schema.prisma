@@ -10,30 +10,30 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  username  String   @unique
+  id        String    @id @default(cuid())
+  email     String    @unique
+  username  String    @unique
   firstName String
   lastName  String
   image     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   members   Member[]
+  projects  Project[]
   tickets   Ticket[]
 }
 
 model Member {
   id             String          @id @default(cuid())
-  creator        Boolean
   leader         Boolean
   rating         Int             @default(100)
   active         Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
   user           User            @relation(fields: [userId], references: [id])
   userId         String
   project        Project         @relation(fields: [projectId], references: [id])
   projectId      String
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
   authorizations Authorization[]
   messages       Message[]
   reactions      Reaction[]
@@ -57,6 +57,8 @@ model Project {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   dueAt         DateTime?
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String
   members       Member[]
   roles         Role[]
   messages      Message[]
