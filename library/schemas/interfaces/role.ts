@@ -10,7 +10,6 @@ interface IRole {
   project?: IProject
   projectId: string
   permission?: IPermission
-  permissionId: string
   authorizations?: IAuthorization[]
 }
 

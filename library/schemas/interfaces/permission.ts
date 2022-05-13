@@ -12,6 +12,7 @@ interface IPermission {
   announcement: boolean
   ticket: boolean
   role?: IRole
+  roleId?: string
 }
 
 export default IPermission
