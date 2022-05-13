@@ -12,7 +12,6 @@ import IUser from './user'
 
 interface IMember {
   id: string
-  leader: boolean
   rating: number
   active: boolean
   createdAt: string

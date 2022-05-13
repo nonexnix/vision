@@ -25,7 +25,6 @@ model User {
 
 model Member {
   id             String          @id @default(cuid())
-  leader         Boolean
   rating         Int             @default(100)
   active         Boolean         @default(true)
   createdAt      DateTime        @default(now())
@@ -96,6 +95,7 @@ model Role {
 // Creator have access to all modifications
 model Permission {
   id           String  @id @default(cuid())
+  everything   Boolean @default(false)
   project      Boolean @default(false)
   message      Boolean @default(true)
   task         Boolean @default(false)

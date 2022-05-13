@@ -2,6 +2,7 @@ import IRole from './role'
 
 interface IPermission {
   id: string
+  everything: boolean
   project: boolean
   message: boolean
   task: boolean
