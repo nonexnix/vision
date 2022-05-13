@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { IUser } from '../../../library/schemas/interfaces'
 import postman from '../../../library/utilities/postman'
 import prisma from '../../../library/utilities/prisma'
 
@@ -9,7 +8,7 @@ const handler: THandler = async (request, response) => {
   if (request.method === 'POST') {
     const body = JSON.parse(request.body)
     try {
-      const user: IUser = await prisma.user.create({
+      await prisma.user.create({
         data: {
           email: body.email,
           username: body.username,
@@ -18,7 +17,7 @@ const handler: THandler = async (request, response) => {
           image: body.image,
         },
       })
-      console.log(user)
+
       response.status(201).json(postman(201))
     } catch (error) {
       console.error(error)
