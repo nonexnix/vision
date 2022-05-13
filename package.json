@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "sync": "prisma db push",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "connect": "pscale connect vision initial-setup --port 3309"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",

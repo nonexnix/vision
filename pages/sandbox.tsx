@@ -10,7 +10,15 @@ const Sandbox: NextPage<any> = ({ initialUsers }) => {
 export default Sandbox
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const users = await prisma.user.findMany()
+  const users = await prisma.user.findMany({
+    include: {
+      members: {
+        include: {
+          project: true,
+        },
+      },
+    },
+  })
 
   return {
     props: {
