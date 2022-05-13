@@ -13,7 +13,7 @@ interface IProject {
   name: string
   description: string
   code: string
-  perserve: boolean
+  preserve: boolean
   over: boolean
   createdAt: string
   updatedAt: string
