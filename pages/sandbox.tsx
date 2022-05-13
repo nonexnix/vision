@@ -14,9 +14,40 @@ export const getServerSideProps: GetServerSideProps = async () => {
     include: {
       members: {
         include: {
+          authorizations: {
+            include: {
+              role: {
+                include: {
+                  permission: true,
+                },
+              },
+            },
+          },
           project: {
             include: {
-              members: true,
+              members: {
+                include: {
+                  authorizations: {
+                    include: {
+                      role: {
+                        include: {
+                          permission: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              roles: {
+                include: {
+                  permission: true,
+                  authorizations: {
+                    include: {
+                      member: true,
+                    },
+                  },
+                },
+              },
             },
           },
         },
