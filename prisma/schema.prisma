@@ -86,8 +86,7 @@ model Role {
   default        Boolean         @default(false)
   project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId      String
-  permission     Permission      @relation(fields: [permissionId], references: [id], onDelete: Cascade)
-  permissionId   String          @unique
+  permission     Permission?
   authorizations Authorization[]
 }
 
@@ -104,7 +103,8 @@ model Permission {
   file         Boolean @default(true)
   announcement Boolean @default(false)
   ticket       Boolean @default(false)
-  role         Role?
+  role         Role    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId       String  @unique
 }
 
 model Authorization {
