@@ -14,7 +14,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
     include: {
       members: {
         include: {
-          project: true,
+          project: {
+            include: {
+              members: true,
+            },
+          },
         },
       },
     },
