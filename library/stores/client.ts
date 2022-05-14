@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { IMember, IMessage, IUser } from '../schemas/interfaces'
+import { IMessage, IUser } from '../schemas/interfaces'
 import { TPriority } from '../schemas/types'
 
 interface IUseClientStore {
@@ -8,6 +8,36 @@ interface IUseClientStore {
   read: {
     users: (users: IUser[]) => void
     messages: (messages: IMessage[]) => void
+  }
+  create: {
+    user: (
+      email: string,
+      username: string,
+      firstName: string,
+      lastName: string,
+      image: string
+    ) => void
+    member: (members: { userId: string; projectId: string }[]) => void
+    project: (
+      name: string,
+      description: string,
+      dueAt: string,
+      userId: string
+    ) => void
+    message: (text: string, memberId: string, projectId: string) => void
+    task: (
+      name: string,
+      description: string,
+      priority: TPriority,
+      dueAt: string,
+      memberId: string,
+      projectId: string,
+      participants: { memberId: string }[]
+    ) => void
+    participant: (
+      participants: { memberId: string; key: string; value: string }[]
+    ) => void
+    ticket: (code: string, userId: string, projectId: string) => void
   }
   delete: {
     user: (user: string) => void
@@ -45,6 +75,66 @@ const useClientStore = create<IUseClientStore>((set) => ({
   read: {
     users: (users) => set({ users: users }),
     messages: (messages) => set({ messages: messages }),
+  },
+  create: {
+    user: async (email, username, firstName, lastName, image) => {
+      await fetch('/api/users/create', {
+        method: 'POST',
+        body: JSON.stringify({ email, username, firstName, lastName, image }),
+      })
+    },
+    member: async (members) => {
+      await fetch('/api/members/create', {
+        method: 'POST',
+        body: JSON.stringify([...members]),
+      })
+    },
+    project: async (name, description, dueAt, userId) => {
+      await fetch('/api/projects/create', {
+        method: 'POST',
+        body: JSON.stringify({ name, description, dueAt, userId }),
+      })
+    },
+    message: async (text, memberId, projectId) => {
+      await fetch('/api/messages/create', {
+        method: 'POST',
+        body: JSON.stringify({ text, memberId, projectId }),
+      })
+    },
+    task: async (
+      name,
+      description,
+      priority,
+      dueAt,
+      memberId,
+      projectId,
+      participants
+    ) => {
+      await fetch('/api/tasks/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          name,
+          description,
+          priority,
+          dueAt,
+          memberId,
+          projectId,
+          participants,
+        }),
+      })
+    },
+    participant: async (participants) => {
+      await fetch('/api/participants/create', {
+        method: 'POST',
+        body: JSON.stringify([...participants]),
+      })
+    },
+    ticket: async (ticket) => {
+      await fetch('/api/tickets/create', {
+        method: 'POST',
+        body: JSON.stringify({ ticket }),
+      })
+    },
   },
   delete: {
     user: async (id) => {
