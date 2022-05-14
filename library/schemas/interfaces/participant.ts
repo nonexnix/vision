@@ -1,12 +1,13 @@
+import { TStatus } from '../types'
 import IAnnouncement from './announcement'
 import IFile from './file'
 import IMember from './member'
 import ISuggestion from './suggestion'
 import ITask from './task'
-import ITodo from './todo'
 
 interface IParticipant {
   id: string
+  status: TStatus
   member?: IMember
   memberId: string
   task?: ITask
