@@ -1,10 +1,21 @@
 import { GetServerSideProps, NextPage } from 'next'
+import { useEffect } from 'react'
+import useClientStore from '../library/stores/client'
 import objectified from '../library/utilities/objectified'
 import prisma from '../library/utilities/prisma'
 
 const Sandbox: NextPage<any> = ({ initialUsers }) => {
-  console.log(initialUsers)
-  return <div>Sandbox</div>
+  const users = useClientStore((state) => state.users)
+
+  useEffect(() => {
+    useClientStore.getState().read.users(initialUsers)
+  }, [initialUsers])
+
+  if (!users) return <></>
+
+  console.log(users)
+
+  return <div>{users[0].firstName}</div>
 }
 
 export default Sandbox
