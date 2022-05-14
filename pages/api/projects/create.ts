@@ -21,7 +21,7 @@ const handler: THandler = async (request, response) => {
         },
         include: { members: { select: { id: true } } },
       })
-      roles(project.id, project.members[0].id)
+      await roles(project.id, project.members[0].id)
       response.status(201).json(postman(201))
     } catch (error) {
       console.error(error)
