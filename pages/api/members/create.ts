@@ -9,9 +9,7 @@ const handler: THandler = async (request, response) => {
     const body = JSON.parse(request.body)
     try {
       const roles = await prisma.role.findMany({
-        where: {
-          projectId: body.projectId,
-        },
+        where: { projectId: body.projectId },
       })
       for (const { userId, projectId } of body.members) {
         await prisma.member.create({

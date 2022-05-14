@@ -17,11 +17,7 @@ const handler: THandler = async (request, response) => {
           dueAt: phase(body.dueAt, 'iso'),
           memberId: body.memberId,
           projectId: body.projectId,
-          participants: {
-            createMany: {
-              data: [...body.participants],
-            },
-          },
+          participants: { createMany: { data: [...body.participants] } },
         },
       })
       response.status(201).json(postman(201))
