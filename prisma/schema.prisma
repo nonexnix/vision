@@ -223,7 +223,6 @@ model Announcement {
 
 model Participant {
   id             String        @id @default(cuid())
-  status         Status        @default(APPROVED)
   member         Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId       String
   task           Task?         @relation(fields: [taskId], references: [id], onDelete: Cascade)

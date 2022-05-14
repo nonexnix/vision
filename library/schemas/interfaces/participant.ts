@@ -7,7 +7,6 @@ import ITask from './task'
 
 interface IParticipant {
   id: string
-  status: TStatus
   member?: IMember
   memberId: string
   task?: ITask
