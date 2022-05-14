@@ -88,6 +88,8 @@ model Role {
   projectId      String
   permission     Permission?
   authorizations Authorization[]
+
+  @@unique([name, projectId])
 }
 
 // Permission to become a creator
