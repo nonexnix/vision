@@ -17,53 +17,11 @@ const handler: THandler = async (request, response) => {
           code: unicode(),
           dueAt: phase(body.dueAt, 'iso'),
           userId: body.userId,
-          members: {
-            create: {
-              userId: body.userId,
-            },
-          },
-          roles: {
-            create: {
-              name: 'Leader',
-              description:
-                'A project leader is a professional who leads people and makes sure a project is carried through.',
-              default: true,
-              permission: {
-                create: {
-                  everything: true,
-                },
-              },
-            },
-          },
+          members: { create: { userId: body.userId } },
         },
-        include: {
-          members: { select: { id: true } },
-          roles: { select: { id: true } },
-        },
+        include: { members: { select: { id: true } } },
       })
-
-      await prisma.authorization.create({
-        data: {
-          memberId: project.members[0].id,
-          roleId: project.roles[0].id,
-        },
-      })
-
-      await prisma.role.create({
-        data: {
-          name: 'Member',
-          description:
-            'A Project member are the individual who actively work on one or more phases of the project.',
-          default: true,
-          projectId: project.id,
-          permission: {
-            create: {
-              everything: true,
-            },
-          },
-        },
-      })
-
+      roles(project.id, project.members[0].id)
       response.status(201).json(postman(201))
     } catch (error) {
       console.error(error)
@@ -75,3 +33,34 @@ const handler: THandler = async (request, response) => {
 }
 
 export default handler
+
+const roles = async (projectId: string, memberId: string) => {
+  const leader = await prisma.role.create({
+    data: {
+      name: 'Leader',
+      description:
+        'A project leader is a professional who leads people and makes sure a project is carried through.',
+      default: true,
+      projectId: projectId,
+      permission: { create: { everything: true } },
+    },
+  })
+
+  await prisma.role.create({
+    data: {
+      name: 'Member',
+      description:
+        'A Project member are the individual who actively work on one or more phases of the project.',
+      default: true,
+      projectId: projectId,
+      permission: { create: {} },
+    },
+  })
+
+  await prisma.authorization.create({
+    data: {
+      memberId: memberId,
+      roleId: leader.id,
+    },
+  })
+}

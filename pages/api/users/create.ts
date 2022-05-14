@@ -17,7 +17,6 @@ const handler: THandler = async (request, response) => {
           image: body.image,
         },
       })
-
       response.status(201).json(postman(201))
     } catch (error) {
       console.error(error)
