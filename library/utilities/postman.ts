@@ -1,16 +1,13 @@
 interface IPostman {
-  title: string
   code: number
   message: string
 }
 
 class Postman implements IPostman {
-  title
   code
   message
 
   constructor(code: number, message: string) {
-    this.title = 'Vision'
     this.code = code
     this.message = message
   }
