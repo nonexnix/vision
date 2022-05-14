@@ -8,11 +8,7 @@ const handler: THandler = async (request, response) => {
   if (request.method === 'DELETE') {
     const body = JSON.parse(request.body)
     try {
-      await prisma.project.delete({
-        where: {
-          id: body.id,
-        },
-      })
+      await prisma.project.delete({ where: { id: body.id } })
       response.status(200).json(postman(200))
     } catch (error) {
       console.error(error)
