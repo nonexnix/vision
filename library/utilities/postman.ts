@@ -15,6 +15,9 @@ class Postman implements IPostman {
 
 const postman = (code: number): IPostman => {
   switch (code) {
+    case 200: {
+      return new Postman(code, 'OK')
+    }
     case 201: {
       return new Postman(code, 'Created')
     }
