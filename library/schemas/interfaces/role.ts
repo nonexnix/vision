@@ -6,7 +6,8 @@ interface IRole {
   id: string
   name: string
   description: string
-  default: boolean
+  permanent: boolean
+  constant: boolean
   project?: IProject
   projectId: string
   permission?: IPermission

@@ -83,7 +83,8 @@ model Role {
   id             String          @id @default(cuid())
   name           String
   description    String
-  default        Boolean         @default(false)
+  permanent      Boolean         @default(false)
+  constant       Boolean         @default(false)
   project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId      String
   permission     Permission?
