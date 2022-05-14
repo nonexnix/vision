@@ -172,7 +172,6 @@ model Todo {
   memberId     String
   task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId       String
-  participants Participant[]
 }
 
 model Suggestion {
@@ -226,8 +225,6 @@ model Participant {
   memberId       String
   task           Task?         @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId         String?
-  todo           Todo?         @relation(fields: [todoId], references: [id], onDelete: Cascade)
-  todoId         String?
   suggestion     Suggestion?   @relation(fields: [suggestionId], references: [id], onDelete: Cascade)
   suggestionId   String?
   file           File?         @relation(fields: [fileId], references: [id], onDelete: Cascade)
@@ -236,7 +233,6 @@ model Participant {
   announcementId String?
 
   @@unique([memberId, taskId])
-  @@unique([memberId, todoId])
   @@unique([memberId, suggestionId])
   @@unique([memberId, fileId])
   @@unique([memberId, announcementId])

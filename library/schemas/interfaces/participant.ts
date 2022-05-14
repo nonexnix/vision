@@ -11,8 +11,6 @@ interface IParticipant {
   memberId: string
   task?: ITask
   taskId: string
-  todo?: ITodo
-  todoId: string
   suggestion?: ISuggestion
   suggestionId: string
   file?: IFile

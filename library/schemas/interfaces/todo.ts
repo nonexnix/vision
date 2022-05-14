@@ -17,7 +17,6 @@ interface ITodo {
   memberId: string
   task?: ITask
   taskId: string
-  participants?: IParticipant[]
 }
 
 export default ITodo
