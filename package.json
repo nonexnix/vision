@@ -9,7 +9,7 @@
     "lint": "next lint",
     "sync": "prisma db push",
     "studio": "prisma studio",
-    "connect": "pscale connect vision initial-setup --port 3309",
+    "connect": "pscale connect vision development --port 3309",
     "reset": "prisma migrate reset"
   },
   "dependencies": {
