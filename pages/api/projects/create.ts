@@ -40,7 +40,7 @@ const roles = async (projectId: string, memberId: string) => {
       name: 'Leader',
       description:
         'A project leader is a professional who leads people and makes sure a project is carried through.',
-      default: true,
+      permanent: true,
       projectId: projectId,
       permission: { create: { everything: true } },
     },
@@ -51,7 +51,8 @@ const roles = async (projectId: string, memberId: string) => {
       name: 'Member',
       description:
         'A Project member are the individual who actively work on one or more phases of the project.',
-      default: true,
+      permanent: true,
+      constant: true,
       projectId: projectId,
       permission: { create: {} },
     },
