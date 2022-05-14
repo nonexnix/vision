@@ -11,12 +11,8 @@ const handler: THandler = async (request, response) => {
     const value = body.key === 'dueAt' ? phase(body.value, 'iso') : body.value
     try {
       await prisma.task.update({
-        where: {
-          id: body.id,
-        },
-        data: {
-          [body.key]: value,
-        },
+        where: { id: body.id },
+        data: { [body.key]: value },
       })
       response.status(200).json(postman(200))
     } catch (error) {
