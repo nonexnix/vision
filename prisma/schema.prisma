@@ -159,19 +159,19 @@ model Task {
 }
 
 model Todo {
-  id           String        @id @default(cuid())
-  name         String
-  description  String
-  rate         Int           @default(2)
-  priority     Priority      @default(MEDIUM)
-  over         Boolean       @default(false)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  dueAt        DateTime?
-  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
-  memberId     String
-  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  taskId       String
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  rate        Int       @default(2)
+  priority    Priority  @default(MEDIUM)
+  over        Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  dueAt       DateTime?
+  member      Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId    String
+  task        Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId      String
 }
 
 model Suggestion {
