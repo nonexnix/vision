@@ -46,7 +46,7 @@ const roles = async (projectId: string, memberId: string) => {
     },
   })
 
-  await prisma.role.create({
+  const member = await prisma.role.create({
     data: {
       name: 'Member',
       description:
@@ -57,10 +57,13 @@ const roles = async (projectId: string, memberId: string) => {
     },
   })
 
-  await prisma.authorization.create({
-    data: {
-      memberId: memberId,
-      roleId: leader.id,
-    },
-  })
+  for (const { id } of [leader, member]) {
+    const roleId = id
+    await prisma.authorization.create({
+      data: {
+        memberId: memberId,
+        roleId: roleId,
+      },
+    })
+  }
 }
