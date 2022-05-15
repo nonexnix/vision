@@ -11,17 +11,15 @@ const handler: THandler = async (request, response) => {
       const roles = await prisma.role.findMany({
         where: { projectId: body.projectId },
       })
-      for (const { userId, projectId } of body.members) {
-        await prisma.member.create({
-          data: {
-            userId: userId,
-            projectId: projectId,
-            authorizations: {
-              create: { roleId: roles.filter((role) => role.name === 'Member')[0].id },
-            },
+      await prisma.member.create({
+        data: {
+          userId: body.userId,
+          projectId: body.projectId,
+          authorizations: {
+            create: { roleId: roles.filter((role) => role.name === 'Member')[0].id },
           },
-        })
-      }
+        },
+      })
       response.status(201).json(postman(201))
     } catch (error) {
       console.error(error)

@@ -15,7 +15,7 @@ const Chat = () => {
     return data
   }
 
-  const { data } = useSWR('/api/messages/read', fetcher, {
+  const { data } = useSWR('/api/message/read', fetcher, {
     fallbackData: messages,
     refreshInterval: 200,
   })

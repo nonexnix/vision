@@ -20,16 +20,16 @@ const Home: NextPage<IHome> = ({ initialUser }) => {
     useClientStore.getState().read.user(initialUser)
   }, [initialUser])
 
-  if (!user) return <></>
+  if (!user.id) return <></>
 
   console.log(user)
 
   return (
-    <Page title={`HOME | ${user.username}`}>
+    <Page title={`Home | @${user.username}`}>
       <Layout>
         <Header />
         <Main>
-          <section>HOME PAGE</section>
+          <section>Home Page</section>
         </Main>
       </Layout>
     </Page>

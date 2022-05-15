@@ -8,6 +8,7 @@ interface IUser {
   username: string
   firstName: string
   lastName: string
+  image: string
   createdAt: string | Date
   updatedAt: string | Date
   members?: IMember[]

@@ -8,14 +8,12 @@ const handler: THandler = async (request, response) => {
   if (request.method === 'POST') {
     const body = JSON.parse(request.body)
     try {
-      for (const { memberId, key, value } of body.participants) {
-        await prisma.participant.create({
-          data: {
-            memberId: memberId,
-            [key]: value,
-          },
-        })
-      }
+      await prisma.participant.create({
+        data: {
+          memberId: body.memberId,
+          [body.key]: body.value,
+        },
+      })
       response.status(201).json(postman(201))
     } catch (error) {
       console.error(error)

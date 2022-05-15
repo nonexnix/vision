@@ -1,8 +1,4 @@
-type IRecord = (
-  endpoint: string,
-  action: 'CREATE' | 'UPDATE' | 'DELETE',
-  payload: any
-) => void
+type IRecord = (endpoint: string, action: 'CREATE' | 'UPDATE' | 'DELETE', payload: any) => void
 
 const record: IRecord = async (endpoint, action, payload) => {
   switch (action) {
