@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
+import { IMessage } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
 
-const Chat = () => {
-  const user = useClientStore((state) => state.user)!
-  const projectId = user.members![0].project!.id
+interface IChat {
+  initialMessages: IMessage[]
+  projectId: string
+}
 
+const Chat = ({ initialMessages, projectId }: IChat) => {
   const fetcher = async (endpoint: string) => {
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -15,7 +18,8 @@ const Chat = () => {
     return data
   }
 
-  const { data } = useSWR('/api/messages/read', fetcher, {
+  const { data, error } = useSWR('/api/messages/read', fetcher, {
+    fallbackData: initialMessages,
     refreshInterval: 200,
   })
 

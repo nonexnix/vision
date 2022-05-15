@@ -1,16 +1,17 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useEffect } from 'react'
 import Chat from '../../../../../components/chat'
-import { IUser } from '../../../../../library/schemas/interfaces'
+import { IMessage, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
 import prisma from '../../../../../library/utilities/prisma'
 
 interface IDashboard {
   initialUser: IUser
+  initialMessages: IMessage[]
 }
 
-const Dashboard: NextPage<IDashboard> = ({ initialUser }) => {
+const Dashboard: NextPage<IDashboard> = ({ initialUser, initialMessages }) => {
   const user = useClientStore((state) => state.user)!
 
   useEffect(() => {
@@ -24,7 +25,10 @@ const Dashboard: NextPage<IDashboard> = ({ initialUser }) => {
   return (
     <div>
       <div>Dashboard</div>
-      <Chat />
+      <Chat
+        initialMessages={initialMessages}
+        projectId={user.members![0].projectId}
+      />
     </div>
   )
 }
@@ -36,9 +40,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     where: { id: String(query.userId) },
     include: {
       members: {
-        where: {
-          id: String(query.memberId),
-        },
+        where: { id: String(query.memberId) },
         include: {
           project: {
             include: {
@@ -54,9 +56,14 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   })
 
+  const messages = await prisma.message.findMany({
+    where: { projectId: user?.members[0].projectId },
+  })
+
   return {
     props: {
       initialUser: objectified(user),
+      initialMessages: objectified(messages),
     },
   }
 }
