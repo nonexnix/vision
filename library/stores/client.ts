@@ -4,7 +4,7 @@ import { TPriority } from '../schemas/types'
 import record from '../utilities/record'
 
 interface IUseClientStore {
-  users: IUser[] | null
+  user: IUser | null
   messages: IMessage[] | null
   read: IRead
   create: ICreate
@@ -13,10 +13,10 @@ interface IUseClientStore {
 }
 
 const useClientStore = create<IUseClientStore>((set) => ({
-  users: null,
+  user: null,
   messages: null,
   read: {
-    users: (payload) => set({ users: payload }),
+    user: (payload) => set({ user: payload }),
     messages: (payload) => set({ messages: payload }),
   },
   create: {
@@ -129,7 +129,7 @@ export default useClientStore
 // ---------------------------------------------------------------------------------------
 
 interface IRead {
-  users: (payload: IUser[]) => void
+  user: (payload: IUser) => void
   messages: (payload: IMessage[]) => void
 }
 
