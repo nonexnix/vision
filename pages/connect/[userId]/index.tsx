@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
+import prisma from '../../../library/utilities/prisma'
 
 interface IHome {
   initialUser: IUser
