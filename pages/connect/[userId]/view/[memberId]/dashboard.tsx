@@ -19,27 +19,25 @@ interface IDashboard {
 const Dashboard: NextPage<IDashboard> = ({ initialUser, initialProject, initialMessages }) => {
   const user = useClientStore((state) => state.user)
   const project = useClientStore((state) => state.project)
-  const messages = useClientStore((state) => state.messages)
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
     useClientStore.getState().read.project(initialProject)
-    useClientStore.getState().read.messages(initialMessages)
-  }, [initialUser, initialProject, initialMessages])
+  }, [initialUser, initialProject])
 
-  if (!user.id || !project.id || !messages) return <></>
+  if (!user.id || !project.id) return <></>
 
   console.log(user)
   console.log(project)
 
   return (
-    <Page title={`DASHBOARD | @${user.username}`}>
+    <Page title={`Dashboard | @${user.username}`}>
       <Layout>
         <Header />
         <Main>
           <section>Dashboard Page</section>
           <section>{project.name}</section>
-          <Chat />
+          <Chat initialMessages={initialMessages} />
         </Main>
       </Layout>
     </Page>

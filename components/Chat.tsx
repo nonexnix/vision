@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
+import { IMessage } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
 
-const Chat = () => {
+interface IChat {
+  initialMessages: IMessage[]
+}
+
+const Chat = ({ initialMessages }: IChat) => {
   const project = useClientStore((state) => state.project)
   const messages = useClientStore((state) => state.messages)
 
@@ -16,12 +21,12 @@ const Chat = () => {
   }
 
   const { data } = useSWR('/api/message/read', fetcher, {
-    fallbackData: messages,
+    fallbackData: initialMessages,
     refreshInterval: 200,
   })
 
   useEffect(() => {
-    useClientStore.getState().read.messages(data)
+    if (!messages) useClientStore.getState().read.messages(data)
   }, [data])
 
   if (!data || !messages) return <></>
