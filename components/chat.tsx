@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
-import { IMessage } from '../library/schemas/interfaces'
+import type { IMessage } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
 
 interface IChat {

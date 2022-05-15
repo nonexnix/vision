@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { IMessage, IUser } from '../schemas/interfaces'
+import type { IMessage, IUser } from '../schemas/interfaces'
 import { TPriority } from '../schemas/types'
 import record from '../utilities/record'
 
