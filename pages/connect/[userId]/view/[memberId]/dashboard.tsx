@@ -1,7 +1,11 @@
-import { GetServerSideProps, NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import { useEffect } from 'react'
 import Chat from '../../../../../components/chat'
-import { IMessage, IUser } from '../../../../../library/schemas/interfaces'
+import Header from '../../../../../components/Header'
+import Layout from '../../../../../components/Layout'
+import Main from '../../../../../components/Main'
+import Page from '../../../../../components/Page'
+import type { IMessage, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
 import prisma from '../../../../../library/utilities/prisma'
@@ -23,13 +27,18 @@ const Dashboard: NextPage<IDashboard> = ({ initialUser, initialMessages }) => {
   console.log(user)
 
   return (
-    <div>
-      <div>Dashboard</div>
-      <Chat
-        initialMessages={initialMessages}
-        projectId={user.members![0].projectId}
-      />
-    </div>
+    <Page title={`DASHBOARD | ${user.username}`}>
+      <Layout>
+        <Header />
+        <Main>
+          <section>HOME PAGE</section>
+          <Chat
+            initialMessages={initialMessages}
+            projectId={user.members![0].projectId}
+          />
+        </Main>
+      </Layout>
+    </Page>
   )
 }
 
