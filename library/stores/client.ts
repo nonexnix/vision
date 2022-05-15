@@ -1,217 +1,221 @@
 import create from 'zustand'
 import { IMessage, IUser } from '../schemas/interfaces'
 import { TPriority } from '../schemas/types'
+import record from '../utilities/record'
 
 interface IUseClientStore {
   users: IUser[] | null
   messages: IMessage[] | null
-  read: {
-    users: (users: IUser[]) => void
-    messages: (messages: IMessage[]) => void
-  }
-  create: {
-    user: (
-      email: string,
-      username: string,
-      firstName: string,
-      lastName: string,
-      image: string
-    ) => void
-    member: (members: { userId: string; projectId: string }[]) => void
-    project: (
-      name: string,
-      description: string,
-      dueAt: string,
-      userId: string
-    ) => void
-    message: (text: string, memberId: string, projectId: string) => void
-    task: (
-      name: string,
-      description: string,
-      priority: TPriority,
-      dueAt: string,
-      memberId: string,
-      projectId: string,
-      participants: { memberId: string }[]
-    ) => void
-    participant: (
-      participants: { memberId: string; key: string; value: string }[]
-    ) => void
-    ticket: (code: string, userId: string, projectId: string) => void
-  }
-  delete: {
-    user: (user: string) => void
-    member: (member: string) => void
-    project: (project: string) => void
-    message: (message: string) => void
-    task: (task: string) => void
-    participant: (participant: string) => void
-    ticket: (ticket: string) => void
-  }
-  update: {
-    user: (
-      id: string,
-      key: 'username' | 'firstName' | 'lastName',
-      value: string
-    ) => void
-    member: (id: string, key: 'rating' | 'active', value: string) => void
-    project: (
-      id: string,
-      key: 'name' | 'description' | 'over' | 'preserve' | 'dueAt',
-      value: string
-    ) => void
-    message: (id: string, key: 'text', value: string) => void
-    task: (
-      id: string,
-      key: 'name' | 'description' | 'priority' | 'over',
-      value: string | TPriority
-    ) => void
-  }
+  read: IRead
+  create: ICreate
+  update: IUpdate
+  delete: IDelete
 }
 
 const useClientStore = create<IUseClientStore>((set) => ({
   users: null,
   messages: null,
   read: {
-    users: (users) => set({ users: users }),
-    messages: (messages) => set({ messages: messages }),
+    users: (payload) => set({ users: payload }),
+    messages: (payload) => set({ messages: payload }),
   },
   create: {
-    user: async (email, username, firstName, lastName, image) => {
-      await fetch('/api/users/create', {
-        method: 'POST',
-        body: JSON.stringify({ email, username, firstName, lastName, image }),
-      })
+    user: (payload) => {
+      record('users', 'CREATE', payload)
     },
-    member: async (members) => {
-      await fetch('/api/members/create', {
-        method: 'POST',
-        body: JSON.stringify([...members]),
-      })
+    member: (payload) => {
+      record('members', 'CREATE', payload)
     },
-    project: async (name, description, dueAt, userId) => {
-      await fetch('/api/projects/create', {
-        method: 'POST',
-        body: JSON.stringify({ name, description, dueAt, userId }),
-      })
+    project: (payload) => {
+      record('projects', 'CREATE', payload)
     },
-    message: async (text, memberId, projectId) => {
-      await fetch('/api/messages/create', {
-        method: 'POST',
-        body: JSON.stringify({ text, memberId, projectId }),
-      })
+    message: (payload) => {
+      record('messages', 'CREATE', payload)
     },
-    task: async (
-      name,
-      description,
-      priority,
-      dueAt,
-      memberId,
-      projectId,
-      participants
-    ) => {
-      await fetch('/api/tasks/create', {
-        method: 'POST',
-        body: JSON.stringify({
-          name,
-          description,
-          priority,
-          dueAt,
-          memberId,
-          projectId,
-          participants,
-        }),
-      })
+    task: (payload) => {
+      record('tasks', 'CREATE', payload)
     },
-    participant: async (participants) => {
-      await fetch('/api/participants/create', {
-        method: 'POST',
-        body: JSON.stringify([...participants]),
-      })
+    participant: (payload) => {
+      record('participants', 'CREATE', payload)
     },
-    ticket: async (ticket) => {
-      await fetch('/api/tickets/create', {
-        method: 'POST',
-        body: JSON.stringify({ ticket }),
-      })
-    },
-  },
-  delete: {
-    user: async (id) => {
-      await fetch('/api/users/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
-    },
-    member: async (id) => {
-      await fetch('/api/members/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
-    },
-    project: async (id) => {
-      await fetch('/api/projects/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
-    },
-    message: async (id) => {
-      await fetch('/api/messages/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
-    },
-    task: async (id) => {
-      await fetch('/api/tasks/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
-    },
-    participant: async (id) => {
-      await fetch('/api/participants/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
-    },
-    ticket: async (id) => {
-      await fetch('/api/tickets/delete', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
+    ticket: (payload) => {
+      record('tickets', 'CREATE', payload)
     },
   },
   update: {
-    user: async (id, key, value) => {
-      await fetch('/api/users/update', {
-        method: 'PUT',
-        body: JSON.stringify({ id, key, value }),
-      })
+    user: {
+      username: (payload) => {
+        record('users', 'UPDATE', payload)
+      },
+      firstName: (payload) => {
+        record('users', 'UPDATE', payload)
+      },
+      lastName: (payload) => {
+        record('users', 'UPDATE', payload)
+      },
     },
-    member: async (id, key, value) => {
-      await fetch('/api/members/update', {
-        method: 'PUT',
-        body: JSON.stringify({ id, key, value }),
-      })
+    member: {
+      rating: (payload) => {
+        record('members', 'UPDATE', payload)
+      },
+      active: (payload) => {
+        record('members', 'UPDATE', payload)
+      },
     },
-    project: async (id, key, value) => {
-      await fetch('/api/projects/update', {
-        method: 'PUT',
-        body: JSON.stringify({ id, key, value }),
-      })
+    project: {
+      name: (payload) => {
+        record('projects', 'UPDATE', payload)
+      },
+      description: (payload) => {
+        record('projects', 'UPDATE', payload)
+      },
+      over: (payload) => {
+        record('projects', 'UPDATE', payload)
+      },
+      preserve: (payload) => {
+        record('projects', 'UPDATE', payload)
+      },
+      dueAt: (payload) => {
+        record('projects', 'UPDATE', payload)
+      },
     },
-    message: async (id, key, value) => {
-      await fetch('/api/messages/update', {
-        method: 'PUT',
-        body: JSON.stringify({ id, key, value }),
-      })
+    message: {
+      text: (payload) => {
+        record('messages', 'UPDATE', payload)
+      },
     },
-    task: async (id, key, value) => {
-      await fetch('/api/tasks/update', {
-        method: 'PUT',
-        body: JSON.stringify({ id, key, value }),
-      })
+    task: {
+      name: (payload) => {
+        record('tasks', 'UPDATE', payload)
+      },
+      description: (payload) => {
+        record('tasks', 'UPDATE', payload)
+      },
+      priority: (payload) => {
+        record('tasks', 'UPDATE', payload)
+      },
+      over: (payload) => {
+        record('tasks', 'UPDATE', payload)
+      },
+    },
+  },
+  delete: {
+    user: (payload) => {
+      record('users', 'DELETE', payload)
+    },
+    member: (payload) => {
+      record('members', 'DELETE', payload)
+    },
+    project: (payload) => {
+      record('projects', 'DELETE', payload)
+    },
+    message: (payload) => {
+      record('messages', 'DELETE', payload)
+    },
+    task: (payload) => {
+      record('tasks', 'DELETE', payload)
+    },
+    participant: (payload) => {
+      record('participants', 'DELETE', payload)
+    },
+    ticket: (payload) => {
+      record('tickets', 'DELETE', payload)
     },
   },
 }))
 
 export default useClientStore
+
+// ---------------------------------------------------------------------------------------
+
+interface IRead {
+  users: (payload: IUser[]) => void
+  messages: (payload: IMessage[]) => void
+}
+
+interface ICreate {
+  user: (payload: {
+    email: string
+    username: string
+    firstName: string
+    lastName: string
+    image: string
+  }) => void
+  member: (payload: {
+    members: { userId: string; projectId: string }[]
+  }) => void
+  project: (payload: {
+    name: string
+    description: string
+    dueAt: string
+    userId: string
+  }) => void
+  message: (payload: {
+    text: string
+    memberId: string
+    projectId: string
+  }) => void
+  task: (payload: {
+    name: string
+    description: string
+    priority: TPriority
+    dueAt: string
+    memberId: string
+    projectId: string
+    participants: { memberId: string }[]
+  }) => void
+  participant: (payload: {
+    participants: { memberId: string; key: string; value: string }[]
+  }) => void
+  ticket: (payload: { code: string; userId: string; projectId: string }) => void
+}
+
+interface IUpdate {
+  user: {
+    username: (payload: { id: string; key: 'username'; value: string }) => void
+    firstName: (payload: {
+      id: string
+      key: 'firstName'
+      value: string
+    }) => void
+    lastName: (payload: { id: string; key: 'lastName'; value: string }) => void
+  }
+  member: {
+    rating: (payload: { id: string; key: 'lastName'; value: string }) => void
+    active: (payload: { id: string; key: 'lastName'; value: string }) => void
+  }
+  project: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'name'; value: string }) => void
+    over: (payload: { id: string; key: 'over'; value: boolean }) => void
+    preserve: (payload: { id: string; key: 'preserve'; value: boolean }) => void
+    dueAt: (payload: { id: string; key: 'dueAt'; value: string }) => void
+  }
+  message: {
+    text: (payload: { id: string; key: 'text'; value: string }) => void
+  }
+  task: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: {
+      id: string
+      key: 'description'
+      value: string
+    }) => void
+    priority: (payload: {
+      id: string
+      key: 'priority'
+      value: TPriority
+    }) => void
+    over: (payload: { id: string; key: 'over'; value: boolean }) => void
+  }
+}
+
+interface IDelete {
+  user: (payload: { id: string }) => void
+  member: (payload: { id: string }) => void
+  project: (payload: { id: string }) => void
+  message: (payload: { id: string }) => void
+  task: (payload: { id: string }) => void
+  participant: (payload: { id: string }) => void
+  ticket: (payload: { id: string }) => void
+}
