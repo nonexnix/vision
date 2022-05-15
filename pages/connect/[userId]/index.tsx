@@ -14,7 +14,7 @@ interface IHome {
 }
 
 const Home: NextPage<IHome> = ({ initialUser }) => {
-  const user = useClientStore((state) => state.user)!
+  const user = useClientStore((state) => state.user)
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
