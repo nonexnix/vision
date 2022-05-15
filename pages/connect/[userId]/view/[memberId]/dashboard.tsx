@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { useEffect } from 'react'
-import Chat from '../../../../../components/chat'
+import Chat from '../../../../../components/Chat'
 import Header from '../../../../../components/Header'
 import Layout from '../../../../../components/Layout'
 import Main from '../../../../../components/Main'
