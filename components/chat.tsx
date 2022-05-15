@@ -1,25 +1,22 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
-import type { IMessage } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
 
-interface IChat {
-  initialMessages: IMessage[]
-  projectId: string
-}
+const Chat = () => {
+  const messages = useClientStore((state) => state.messages)
+  const project = useClientStore((state) => state.project)
 
-const Chat = ({ initialMessages, projectId }: IChat) => {
   const fetcher = async (endpoint: string) => {
     const response = await fetch(endpoint, {
       method: 'POST',
-      body: JSON.stringify({ projectId }),
+      body: JSON.stringify({ projectId: project!.id }),
     })
     const data = await response.json()
     return data
   }
 
-  const { data, error } = useSWR('/api/messages/read', fetcher, {
-    fallbackData: initialMessages,
+  const { data } = useSWR('/api/messages/read', fetcher, {
+    fallbackData: messages,
     refreshInterval: 200,
   })
 

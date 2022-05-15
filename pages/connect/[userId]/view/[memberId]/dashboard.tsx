@@ -27,13 +27,15 @@ const Dashboard: NextPage<IDashboard> = ({
 }) => {
   const user = useClientStore((state) => state.user)!
   const project = useClientStore((state) => state.project)!
+  const messages = useClientStore((state) => state.messages)!
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
     useClientStore.getState().read.project(initialProject)
-  }, [initialUser, initialProject])
+    useClientStore.getState().read.messages(initialMessages)
+  }, [initialUser, initialProject, initialMessages])
 
-  if (!user || !project) return <></>
+  if (!user || !project || !messages) return <></>
 
   console.log(user)
   console.log(project)
@@ -44,10 +46,7 @@ const Dashboard: NextPage<IDashboard> = ({
         <Header />
         <Main>
           <section>HOME PAGE</section>
-          <Chat
-            initialMessages={initialMessages}
-            projectId={user.members![0].projectId}
-          />
+          <Chat />
         </Main>
       </Layout>
     </Page>
