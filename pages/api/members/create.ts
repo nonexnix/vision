@@ -17,9 +17,7 @@ const handler: THandler = async (request, response) => {
             userId: userId,
             projectId: projectId,
             authorizations: {
-              create: {
-                roleId: roles.filter((role) => role.name === 'Member')[0].id,
-              },
+              create: { roleId: roles.filter((role) => role.name === 'Member')[0].id },
             },
           },
         })

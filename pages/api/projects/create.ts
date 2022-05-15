@@ -38,8 +38,7 @@ const roles = async (projectId: string, memberId: string) => {
   const leader = await prisma.role.create({
     data: {
       name: 'Leader',
-      description:
-        'A project leader is a professional who leads people and makes sure a project is carried through.',
+      description: 'A project leader is a professional who leads people and makes sure a project is carried through.',
       permanent: true,
       projectId: projectId,
       permission: { create: { everything: true } },
@@ -49,8 +48,7 @@ const roles = async (projectId: string, memberId: string) => {
   const member = await prisma.role.create({
     data: {
       name: 'Member',
-      description:
-        'A Project member are the individual who actively work on one or more phases of the project.',
+      description: 'A Project member are the individual who actively work on one or more phases of the project.',
       permanent: true,
       constant: true,
       projectId: projectId,

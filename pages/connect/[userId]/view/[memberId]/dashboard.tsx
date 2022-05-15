@@ -5,11 +5,7 @@ import Header from '../../../../../components/Header'
 import Layout from '../../../../../components/Layout'
 import Main from '../../../../../components/Main'
 import Page from '../../../../../components/Page'
-import type {
-  IMessage,
-  IProject,
-  IUser,
-} from '../../../../../library/schemas/interfaces'
+import type { IMessage, IProject, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
 import prisma from '../../../../../library/utilities/prisma'
@@ -20,11 +16,7 @@ interface IDashboard {
   initialMessages: IMessage[]
 }
 
-const Dashboard: NextPage<IDashboard> = ({
-  initialUser,
-  initialProject,
-  initialMessages,
-}) => {
+const Dashboard: NextPage<IDashboard> = ({ initialUser, initialProject, initialMessages }) => {
   const user = useClientStore((state) => state.user)!
   const project = useClientStore((state) => state.project)!
   const messages = useClientStore((state) => state.messages)!
