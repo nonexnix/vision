@@ -46,11 +46,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         include: {
           project: {
             include: {
-              members: true,
-              tasks: true,
-              suggestions: true,
-              files: true,
-              announcements: true,
+              _count: {
+                select: {
+                  members: true,
+                  tasks: true,
+                  suggestions: true,
+                  files: true,
+                  announcements: true,
+                },
+              },
             },
           },
         },
