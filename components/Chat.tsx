@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import useSWR from 'swr'
 import useClientStore from '../library/stores/client'
 
-const Chathead = () => {
+const Chat = () => {
   const messages = useClientStore((state) => state.messages)
   const project = useClientStore((state) => state.project)
 
@@ -31,4 +31,4 @@ const Chathead = () => {
   return <div>Chat</div>
 }
 
-export default Chathead
+export default Chat
