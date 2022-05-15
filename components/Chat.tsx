@@ -3,8 +3,8 @@ import useSWR from 'swr'
 import useClientStore from '../library/stores/client'
 
 const Chat = () => {
-  const messages = useClientStore((state) => state.messages)
   const project = useClientStore((state) => state.project)
+  const messages = useClientStore((state) => state.messages)
 
   const fetcher = async (endpoint: string) => {
     const response = await fetch(endpoint, {
@@ -24,7 +24,7 @@ const Chat = () => {
     useClientStore.getState().read.messages(data)
   }, [data])
 
-  if (!data) return <></>
+  if (!data || !messages) return <></>
 
   console.log(data)
 
