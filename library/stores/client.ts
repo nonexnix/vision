@@ -1,10 +1,11 @@
 import create from 'zustand'
-import type { IMessage, IUser } from '../schemas/interfaces'
+import type { IMessage, IProject, IUser } from '../schemas/interfaces'
 import { TPriority } from '../schemas/types'
 import record from '../utilities/record'
 
 interface IUseClientStore {
   user: IUser | null
+  project: IProject | null
   messages: IMessage[] | null
   read: IRead
   create: ICreate
@@ -15,8 +16,10 @@ interface IUseClientStore {
 const useClientStore = create<IUseClientStore>((set) => ({
   user: null,
   messages: null,
+  project: null,
   read: {
     user: (payload) => set({ user: payload }),
+    project: (payload) => set({ project: payload }),
     messages: (payload) => set({ messages: payload }),
   },
   create: {
@@ -130,6 +133,7 @@ export default useClientStore
 
 interface IRead {
   user: (payload: IUser) => void
+  project: (payload: IProject) => void
   messages: (payload: IMessage[]) => void
 }
 

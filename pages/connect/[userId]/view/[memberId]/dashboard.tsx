@@ -5,26 +5,38 @@ import Header from '../../../../../components/Header'
 import Layout from '../../../../../components/Layout'
 import Main from '../../../../../components/Main'
 import Page from '../../../../../components/Page'
-import type { IMessage, IUser } from '../../../../../library/schemas/interfaces'
+import type {
+  IMessage,
+  IProject,
+  IUser,
+} from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
 import prisma from '../../../../../library/utilities/prisma'
 
 interface IDashboard {
   initialUser: IUser
+  initialProject: IProject
   initialMessages: IMessage[]
 }
 
-const Dashboard: NextPage<IDashboard> = ({ initialUser, initialMessages }) => {
+const Dashboard: NextPage<IDashboard> = ({
+  initialUser,
+  initialProject,
+  initialMessages,
+}) => {
   const user = useClientStore((state) => state.user)!
+  const project = useClientStore((state) => state.project)!
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
-  }, [initialUser])
+    useClientStore.getState().read.project(initialProject)
+  }, [initialUser, initialProject])
 
-  if (!user) return <></>
+  if (!user || !project) return <></>
 
   console.log(user)
+  console.log(project)
 
   return (
     <Page title={`DASHBOARD | ${user.username}`}>
@@ -50,18 +62,18 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     include: {
       members: {
         where: { id: String(query.memberId) },
-        include: {
-          project: {
-            include: {
-              members: true,
-              tasks: true,
-              suggestions: true,
-              files: true,
-              announcements: true,
-            },
-          },
-        },
       },
+    },
+  })
+
+  const project = await prisma.project.findUnique({
+    where: { id: user!.members[0].projectId },
+    include: {
+      members: true,
+      tasks: true,
+      suggestions: true,
+      files: true,
+      announcements: true,
     },
   })
 
@@ -72,6 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
       initialUser: objectified(user),
+      initialProject: objectified(project),
       initialMessages: objectified(messages),
     },
   }
