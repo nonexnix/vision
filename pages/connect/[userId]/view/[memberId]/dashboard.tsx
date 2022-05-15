@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { useEffect } from 'react'
-// import Chat from '../../../../../components/Chat'
+import Chat from '../../../../../components/Chat'
 import Header from '../../../../../components/Header'
 import Layout from '../../../../../components/Layout'
 import Main from '../../../../../components/Main'
@@ -46,7 +46,7 @@ const Dashboard: NextPage<IDashboard> = ({
         <Header />
         <Main>
           <section>DASHBOARD PAGE</section>
-          {/* <Chat /> */}
+          <Chat />
         </Main>
       </Layout>
     </Page>
