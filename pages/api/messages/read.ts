@@ -7,7 +7,6 @@ type THandler = (request: NextApiRequest, response: NextApiResponse) => void
 const handler: THandler = async (request, response) => {
   if (request.method === 'POST') {
     const body = JSON.parse(request.body)
-    console.log('hi', body)
     try {
       const messages = await prisma.message.findMany({
         where: { projectId: body.projectId },
