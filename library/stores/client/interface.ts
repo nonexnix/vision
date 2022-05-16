@@ -32,8 +32,8 @@ interface ICreate {
     projectId: string
     participants: { access?: boolean; memberId: string }[]
   }) => void
-  participant: (payload: { access?: boolean; memberId: string; key: 'taskId' | 'todoId' | 'suggestionId' | 'fileId' | 'announcementId'; value: string }) => void
-  participants: (payload: { access?: boolean; memberId: string; key: 'taskId' | 'todoId' | 'suggestionId' | 'fileId' | 'announcementId'; value: string }[]) => void
+  participant: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }) => void
+  participants: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }[]) => void
   ticket: (payload: { code: string; userId: string; projectId: string }) => void
 }
 
@@ -76,3 +76,5 @@ interface IUpdate {
 }
 
 export default IUseClientStore
+
+type IParticipantKey = 'taskId' | 'todoId' | 'suggestionId' | 'fileId' | 'announcementId'
