@@ -92,5 +92,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       initialProject: objectified(project),
       initialMessages: objectified(messages),
     },
+    revalidate: 1,
   }
 }
