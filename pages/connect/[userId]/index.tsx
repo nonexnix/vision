@@ -9,12 +9,12 @@ import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
 import prisma from '../../../library/utilities/prisma'
 
-interface IHome {
+interface IProps {
   initialUser: IUser
 }
 
-const Home: NextPage<IHome> = ({ initialUser }) => {
-  const user = useClientStore((state) => state.user)
+const Home: NextPage<IProps> = ({ initialUser }) => {
+  const user = useClientStore<IUser>((state) => state.user)
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)

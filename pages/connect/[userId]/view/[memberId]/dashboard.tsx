@@ -10,15 +10,15 @@ import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
 import prisma from '../../../../../library/utilities/prisma'
 
-interface IDashboard {
+interface IProps {
   initialUser: IUser
   initialProject: IProject
   initialMessages: IMessage[]
 }
 
-const Dashboard: NextPage<IDashboard> = ({ initialUser, initialProject, initialMessages }) => {
-  const user = useClientStore((state) => state.user)
-  const project = useClientStore((state) => state.project)
+const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessages }) => {
+  const user = useClientStore<IUser>((state) => state.user)
+  const project = useClientStore<IProject>((state) => state.project)
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)

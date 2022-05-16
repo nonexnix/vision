@@ -1,8 +1,8 @@
-interface IMain {
+interface IProps {
   children: React.ReactNode
 }
 
-const Main = ({ children }: IMain) => {
+const Main = ({ children }: IProps) => {
   return (
     <main>
       <div className="area">{children}</div>
