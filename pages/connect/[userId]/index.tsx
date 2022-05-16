@@ -8,16 +8,22 @@ import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
 import prisma from '../../../library/utilities/prisma'
+import { useRouter } from 'next/router'
 
 interface IProps {
   initialUser: IUser
 }
 
+const refresh = (router: any) => {
+  return router.replace(router.asPath)
+}
+
+
 const Home: NextPage<IProps> = ({ initialUser }) => {
   const user = useClientStore<IUser>((state) => state.user)
-  const loader = useClientStore((state) => state.loader)
   const create = useClientStore((state) => state.create.project)
-
+  const router = useRouter()
+ 
   const hander = () => {
     create({
       userId: user.id,
@@ -25,16 +31,16 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
       description: 'Project',
       dueAt: 'September 22, 2022',
     })
+    refresh(router)
   }
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
   }, [initialUser])
 
-  if (!user.id) return <></>
+  if (!user.id || user !== initialUser) return <></>
 
   console.log(user)
-  console.log(loader)
 
   return (
     <Page title={`Home | @${user.username}`}>
@@ -42,6 +48,9 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
         <Header />
         <Main>
           <section onClick={hander}>Home Page</section>
+          {user.members?.map((member) => (
+            <div key={member.id}>{member.project?.name}</div>
+          ))}
         </Main>
       </Layout>
     </Page>
