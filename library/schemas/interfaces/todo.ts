@@ -1,5 +1,6 @@
 import { TStatus } from '../types'
 import IMember from './member'
+import IParticipant from './participant'
 import ITask from './task'
 
 interface ITodo {
@@ -15,6 +16,7 @@ interface ITodo {
   memberId: string
   task?: ITask
   taskId: string
+  participants: IParticipant[]
 }
 
 export default ITodo

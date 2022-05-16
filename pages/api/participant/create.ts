@@ -10,6 +10,7 @@ const handler: THandler = async (request, response) => {
     try {
       await prisma.participant.create({
         data: {
+          access: body.access && body.access,
           memberId: body.memberId,
           [body.key]: body.value,
         },

@@ -162,18 +162,19 @@ model Task {
 }
 
 model Todo {
-  id          String    @id @default(cuid())
-  name        String
-  description String
-  priority    Priority  @default(MEDIUM)
-  over        Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  dueAt       DateTime?
-  member      Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
-  memberId    String
-  task        Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  taskId      String
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  priority     Priority      @default(MEDIUM)
+  over         Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  dueAt        DateTime?
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId     String
+  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId       String
+  participants Participant[]
 }
 
 model Suggestion {
@@ -223,10 +224,13 @@ model Announcement {
 
 model Participant {
   id             String        @id @default(cuid())
+  access         Boolean       @default(false)
   member         Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId       String
   task           Task?         @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId         String?
+  todo           Todo?         @relation(fields: [todoId], references: [id])
+  todoId         String?
   suggestion     Suggestion?   @relation(fields: [suggestionId], references: [id], onDelete: Cascade)
   suggestionId   String?
   file           File?         @relation(fields: [fileId], references: [id], onDelete: Cascade)
@@ -235,6 +239,7 @@ model Participant {
   announcementId String?
 
   @@unique([memberId, taskId])
+  @@unique([memberId, todoId])
   @@unique([memberId, suggestionId])
   @@unique([memberId, fileId])
   @@unique([memberId, announcementId])
