@@ -7,7 +7,7 @@ interface ITodo {
   name: string
   description: string
   priority: TStatus
-  over: number
+  over: boolean
   createdAt: string | Date
   updatedAt: string | Date
   dueAt: string
