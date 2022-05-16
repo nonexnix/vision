@@ -18,7 +18,7 @@ interface IRead {
 }
 
 interface ICreate {
-  user: (payload: { email: string; username: string; firstName: string; lastName: string; image: string }) => void
+  user: (payload: { email: string; username: string; firstName: string; lastName: string; image?: string }) => void
   member: (payload: { userId: string; projectId: string }) => void
   members: (payload: { userId: string; projectId: string }[]) => void
   project: (payload: { name: string; description: string; dueAt: string; userId: string }) => void
