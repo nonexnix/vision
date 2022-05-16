@@ -24,8 +24,8 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
   const create = useClientStore((state) => state.create.project)
   const router = useRouter()
  
-  const hander = () => {
-    create({
+  const hander = async () => {
+    await create({
       userId: user.id,
       name: 'Project x',
       description: 'Project',
