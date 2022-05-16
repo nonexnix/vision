@@ -39,25 +39,14 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
 export default Home
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const users = await prisma.user.findMany({
-    include: {
-      members: {
-        include: {
-          _count: { select: { tasks: true } },
-          project: {
-            include: {
-              _count: { select: { members: true, tasks: true } },
-            },
-          },
-        },
-      },
-    },
-  })
+  const users = await prisma.user.findMany()
+
   const paths = users.map((user) => {
     return {
       params: { userId: user.id },
     }
   })
+  
   return {
     paths,
     fallback: 'blocking',
