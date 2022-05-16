@@ -18,12 +18,11 @@ const refresh = (router: any) => {
   return router.replace(router.asPath)
 }
 
-
 const Home: NextPage<IProps> = ({ initialUser }) => {
   const user = useClientStore<IUser>((state) => state.user)
   const create = useClientStore((state) => state.create.project)
   const router = useRouter()
- 
+
   const hander = async () => {
     await create({
       userId: user.id,
@@ -36,9 +35,12 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
+    if (user !== initialUser) {
+      refresh(router)
+    }
   }, [initialUser])
 
-  if (!user.id || user !== initialUser) return <></>
+  if (!user.id) return <></>
 
   console.log(user)
 
