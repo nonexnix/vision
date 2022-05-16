@@ -23,7 +23,15 @@ interface ICreate {
   members: (payload: { userId: string; projectId: string }[]) => void
   project: (payload: { name: string; description: string; dueAt: string; userId: string }) => void
   message: (payload: { text: string; memberId: string; projectId: string }) => void
-  task: (payload: { name: string; description: string; priority: TPriority; dueAt: string; memberId: string; projectId: string; participants: { memberId: string }[] }) => void
+  task: (payload: {
+    name: string
+    description: string
+    priority: TPriority
+    dueAt: string
+    memberId: string
+    projectId: string
+    participants: { access?: boolean; memberId: string }[]
+  }) => void
   participant: (payload: { access?: boolean; memberId: string; key: 'taskId' | 'todoId' | 'suggestionId' | 'fileId' | 'announcementId'; value: string }) => void
   participants: (payload: { access?: boolean; memberId: string; key: 'taskId' | 'todoId' | 'suggestionId' | 'fileId' | 'announcementId'; value: string }[]) => void
   ticket: (payload: { code: string; userId: string; projectId: string }) => void
