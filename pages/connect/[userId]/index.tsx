@@ -1,4 +1,4 @@
-import type { NextPage, GetServerSideProps } from 'next'
+import type { NextPage, GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
 import Header from '../../../components/Header'
 import Layout from '../../../components/Layout'
@@ -38,9 +38,35 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const users = await prisma.user.findMany({
+    include: {
+      members: {
+        include: {
+          _count: { select: { tasks: true } },
+          project: {
+            include: {
+              _count: { select: { members: true, tasks: true } },
+            },
+          },
+        },
+      },
+    },
+  })
+  const paths = users.map((user) => {
+    return {
+      params: { userId: user.id },
+    }
+  })
+  return {
+    paths,
+    fallback: 'blocking',
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const user = await prisma.user.findUnique({
-    where: { id: String(query.userId) },
+    where: { id: String(params!.userId) },
     include: {
       members: {
         include: {
@@ -59,5 +85,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       initialUser: objectified(user),
     },
+    revalidate: 1,
   }
 }
