@@ -38,5 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       initialUsers: objectified(users),
     },
+    revalidate: 1,
   }
 }
