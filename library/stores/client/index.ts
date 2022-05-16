@@ -21,7 +21,7 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
     },
     member: async (payload) => {
       set({ loader: !get().loader })
-      record('member', 'CREATE', payload)
+      await record('member', 'CREATE', payload)
       set({ loader: !get().loader })
     },
     members: async (payload) => {
