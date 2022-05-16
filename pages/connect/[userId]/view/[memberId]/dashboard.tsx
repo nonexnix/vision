@@ -1,4 +1,4 @@
-import type { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useEffect } from 'react'
 import Chat from '../../../../../components/Chat'
 import Header from '../../../../../components/Header'
