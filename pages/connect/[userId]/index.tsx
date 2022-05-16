@@ -8,36 +8,16 @@ import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
 import prisma from '../../../library/utilities/prisma'
-import { useRouter } from 'next/router'
 
 interface IProps {
   initialUser: IUser
 }
 
-const refresh = (router: any) => {
-  return router.replace(router.asPath)
-}
-
 const Home: NextPage<IProps> = ({ initialUser }) => {
   const user = useClientStore<IUser>((state) => state.user)
-  const create = useClientStore((state) => state.create.project)
-  const router = useRouter()
-
-  const hander = async () => {
-    await create({
-      userId: user.id,
-      name: 'Project x',
-      description: 'Project',
-      dueAt: 'September 22, 2022',
-    })
-    refresh(router)
-  }
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
-    if (user !== initialUser) {
-      refresh(router)
-    }
   }, [initialUser])
 
   if (!user.id) return <></>
@@ -49,10 +29,7 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
       <Layout>
         <Header />
         <Main>
-          <section onClick={hander}>Home Page</section>
-          {user.members?.map((member) => (
-            <div key={member.id}>{member.project?.name}</div>
-          ))}
+          <section>Home Page</section>
         </Main>
       </Layout>
     </Page>
