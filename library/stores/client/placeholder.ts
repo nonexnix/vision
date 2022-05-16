@@ -1,4 +1,4 @@
-import type { IMessage, IProject, IUser } from "../../schemas/interfaces";
+import type { IMessage, IProject, IUser } from '../../schemas/interfaces'
 
 const placeholder: { user: IUser; project: IProject; messages: IMessage[] } = {
   user: {

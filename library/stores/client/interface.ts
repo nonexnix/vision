@@ -67,6 +67,4 @@ interface IUpdate {
   }
 }
 
-
-
 export default IUseClientStore
