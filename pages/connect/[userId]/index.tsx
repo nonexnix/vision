@@ -15,6 +15,17 @@ interface IProps {
 
 const Home: NextPage<IProps> = ({ initialUser }) => {
   const user = useClientStore<IUser>((state) => state.user)
+  const loader = useClientStore((state) => state.loader)
+  const create = useClientStore((state) => state.create.project)
+
+  const hander = () => {
+    create({
+      userId: user.id,
+      name: 'Project x',
+      description: 'Project',
+      dueAt: 'September 22, 2022',
+    })
+  }
 
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
@@ -23,13 +34,14 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
   if (!user.id) return <></>
 
   console.log(user)
+  console.log(loader)
 
   return (
     <Page title={`Home | @${user.username}`}>
       <Layout>
         <Header />
         <Main>
-          <section>Home Page</section>
+          <section onClick={hander}>Home Page</section>
         </Main>
       </Layout>
     </Page>
