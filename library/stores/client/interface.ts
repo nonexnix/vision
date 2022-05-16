@@ -5,6 +5,7 @@ interface IUseClientStore {
   user: IUser
   project: IProject
   messages: IMessage[]
+  loader: boolean
   read: IRead
   create: ICreate
   delete: IDelete
