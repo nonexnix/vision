@@ -27,7 +27,7 @@ const Chat = ({ initialMessages }: IChat) => {
 
   useEffect(() => {
     if (!messages) useClientStore.getState().read.messages(data)
-  }, [data])
+  }, [data, messages])
 
   if (!data || !messages) return <></>
 
