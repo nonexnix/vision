@@ -8,6 +8,7 @@ import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
 import prisma from '../../../library/utilities/prisma'
+import useSWR, { SWRConfiguration } from 'swr'
 
 interface IProps {
   initialUser: IUser
@@ -16,11 +17,26 @@ interface IProps {
 const Home: NextPage<IProps> = ({ initialUser }) => {
   const user = useClientStore<IUser>((state) => state.user)
 
-  useEffect(() => {
-    useClientStore.getState().read.user(initialUser)
-  }, [initialUser])
+  const fetcher = async (endpoint: string) => {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({ id: user.id }),
+    })
+    const data = await response.json()
+    return data
+  }
 
-  if (!user.id) return <></>
+  const config: SWRConfiguration = {
+    fallbackData: initialUser,
+  }
+
+  const { data } = useSWR('/api/user/read', fetcher, config)
+
+  useEffect(() => {
+    useClientStore.getState().read.user(data)
+  }, [data])
+
+  if (data !== user) return <></>
 
   console.log(user)
 
