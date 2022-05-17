@@ -4,48 +4,34 @@ import Header from '../../../components/Header'
 import Layout from '../../../components/Layout'
 import Main from '../../../components/Main'
 import Page from '../../../components/Page'
+import ProjectForm from '../../../components/ProjectForm'
 import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
 import prisma from '../../../library/utilities/prisma'
-import useSWR, { SWRConfiguration } from 'swr'
 
 interface IProps {
   initialUser: IUser
 }
 
 const Home: NextPage<IProps> = ({ initialUser }) => {
-  const user = useClientStore<IUser>((state) => state.user)
-
-  const fetcher = async (endpoint: string) => {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      body: JSON.stringify({ id: user.id }),
-    })
-    const data = await response.json()
-    return data
-  }
-
-  const config: SWRConfiguration = {
-    fallbackData: initialUser,
-  }
-
-  const { data } = useSWR('/api/user/read', fetcher, config)
+  const user = useClientStore((state) => state.user)
 
   useEffect(() => {
-    useClientStore.getState().read.user(data)
-  }, [data])
+    useClientStore.getState().read.user(initialUser)
+  }, [initialUser])
 
-  if (data !== user) return <></>
+  if (!user.id) return <></>
 
   console.log(user)
 
   return (
-    <Page title={`Home | @${user.username}`}>
+    <Page title={`Home | @${user!.username}`}>
       <Layout>
         <Header />
         <Main>
           <section>Home Page</section>
+          <ProjectForm />
         </Main>
       </Layout>
     </Page>
