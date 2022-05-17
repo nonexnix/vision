@@ -34,7 +34,6 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
 
   return (
     <Page title={`Dashboard | @${user.username}`}>
-      <Chatbox />
       <Layout>
         <LayoutHeader />
         <LayoutMain>
@@ -43,6 +42,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
         </LayoutMain>
         <LayoutFooter />
       </Layout>
+      <Chatbox />
     </Page>
   )
 }
