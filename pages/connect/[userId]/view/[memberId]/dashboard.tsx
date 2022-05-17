@@ -24,7 +24,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
     useClientStore.getState().read.user(initialUser)
     useClientStore.getState().read.project(initialProject)
     useClientStore.getState().read.messages(initialMessages)
-  }, [initialUser, initialProject])
+  }, [initialUser, initialProject, initialMessages])
 
   if (!user.id || !project.id) return <></>
 
