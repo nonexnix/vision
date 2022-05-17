@@ -61,39 +61,127 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
     },
   },
   delete: {
-    user: (payload) => record('user', 'DELETE', payload),
-    member: (payload) => record('member', 'DELETE', payload),
-    project: (payload) => record('project', 'DELETE', payload),
-    message: (payload) => record('message', 'DELETE', payload),
-    task: (payload) => record('task', 'DELETE', payload),
-    participant: (payload) => record('participant', 'DELETE', payload),
-    ticket: (payload) => record('ticket', 'DELETE', payload),
+    user: async (payload) => {
+      set({ loader: !get().loader })
+      await record('user', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    member: async (payload) => {
+      set({ loader: !get().loader })
+      await record('member', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    project: async (payload) => {
+      set({ loader: !get().loader })
+      await record('project', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    message: async (payload) => {
+      set({ loader: !get().loader })
+      await record('message', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    task: async (payload) => {
+      set({ loader: !get().loader })
+      await record('task', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    participant: async (payload) => {
+      set({ loader: !get().loader })
+      await record('participant', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    ticket: async (payload) => {
+      set({ loader: !get().loader })
+      await record('ticket', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
   },
   update: {
     user: {
-      username: (payload) => record('user', 'UPDATE', payload),
-      firstName: (payload) => record('user', 'UPDATE', payload),
-      lastName: (payload) => record('user', 'UPDATE', payload),
+      username: async (payload) => {
+        set({ loader: !get().loader })
+        await record('user', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      firstName: async (payload) => {
+        set({ loader: !get().loader })
+        await record('user', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      lastName: async (payload) => {
+        set({ loader: !get().loader })
+        await record('user', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
     },
     member: {
-      rating: (payload) => record('member', 'UPDATE', payload),
-      active: (payload) => record('member', 'UPDATE', payload),
+      rating: async (payload) => {
+        set({ loader: !get().loader })
+        await record('member', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      active: async (payload) => {
+        set({ loader: !get().loader })
+        await record('member', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
     },
     project: {
-      name: (payload) => record('project', 'UPDATE', payload),
-      description: (payload) => record('project', 'UPDATE', payload),
-      over: (payload) => record('project', 'UPDATE', payload),
-      preserve: (payload) => record('project', 'UPDATE', payload),
-      dueAt: (payload) => record('project', 'UPDATE', payload),
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('project', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('project', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      over: async (payload) => {
+        set({ loader: !get().loader })
+        await record('project', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      preserve: async (payload) => {
+        set({ loader: !get().loader })
+        await record('project', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      dueAt: async (payload) => {
+        set({ loader: !get().loader })
+        await record('project', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
     },
     message: {
-      text: (payload) => record('message', 'UPDATE', payload),
+      text: async (payload) => {
+        set({ loader: !get().loader })
+        await record('message', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
     },
     task: {
-      name: (payload) => record('task', 'UPDATE', payload),
-      description: (payload) => record('task', 'UPDATE', payload),
-      priority: (payload) => record('task', 'UPDATE', payload),
-      over: (payload) => record('task', 'UPDATE', payload),
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('task', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('task', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      priority: async (payload) => {
+        set({ loader: !get().loader })
+        await record('task', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      over: async (payload) => {
+        set({ loader: !get().loader })
+        await record('task', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
     },
   },
 }))
