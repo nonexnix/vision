@@ -1,5 +1,3 @@
-import ModalProject from './ModalProject'
-
 interface IProps {
   children: React.ReactNode
 }
