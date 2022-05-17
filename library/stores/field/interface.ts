@@ -8,8 +8,8 @@ interface IUseFieldStore {
     message: (payload: IMessage) => void
   }
   clear: {
-    project: (payload: IProject) => void
-    message: (payload: IMessage) => void
+    project: () => void
+    message: () => void
   }
 }
 

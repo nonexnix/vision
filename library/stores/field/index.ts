@@ -10,8 +10,8 @@ const useFieldStore = create<IUseFieldStore>((set) => ({
     message: (payload) => set({ message: payload }),
   },
   clear: {
-    project: (payload) => set({ project: placeholder.project }),
-    message: (payload) => set({ message: placeholder.message }),
+    project: () => set({ project: placeholder.project }),
+    message: () => set({ message: placeholder.message }),
   },
 }))
 
