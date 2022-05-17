@@ -21,7 +21,7 @@ const ModalProject = () => {
     if (user !== data) {
       useClientStore.getState().read.user(data!)
     }
-  }, [data])
+  }, [data, user])
 
   return <div></div>
 }

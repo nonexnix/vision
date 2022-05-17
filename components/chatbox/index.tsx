@@ -25,7 +25,7 @@ const Chatbox = () => {
     if (messages !== data) {
       useClientStore.getState().read.messages(data!)
     }
-  }, [data])
+  }, [data, messages])
 
   console.log(messages)
 
