@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import useSWR, { SWRConfiguration } from 'swr'
+import useSWR, { SWRConfiguration, mutate } from 'swr'
 import { IMessage } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
 
@@ -11,18 +11,16 @@ const Chat = ({ initialMessages }: IProps) => {
   const project = useClientStore((state) => state.project)
   const messages = useClientStore((state) => state.messages)
 
-  const fetcher = async (endpoint: string): Promise<IMessage[]> => {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      body: JSON.stringify({ projectId: project!.id }),
-    })
-    const data: IMessage[] = await response.json()
-    return data
-  }
-
   const config: SWRConfiguration = {
     fallbackData: initialMessages,
     refreshInterval: 100,
+  }
+
+  const fetcher = async (endpoint: string): Promise<IMessage[]> => {
+    return await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({ projectId: project!.id }),
+    }).then((response) => response.json())
   }
 
   const { data } = useSWR<IMessage[]>('/api/message/read', fetcher, config)
