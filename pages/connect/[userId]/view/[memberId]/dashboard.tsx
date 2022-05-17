@@ -42,7 +42,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
         </LayoutMain>
         <LayoutFooter />
       </Layout>
-      <Chatbox />
+      {/* <Chatbox /> */}
     </Page>
   )
 }
