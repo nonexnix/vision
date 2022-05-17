@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import useSWR, { SWRConfiguration, mutate } from 'swr'
+import useSWR, { SWRConfiguration } from 'swr'
 import { IMessage } from '../../library/schemas/interfaces'
 import useClientStore from '../../library/stores/client'
 
@@ -22,7 +22,7 @@ const Chatbox = () => {
     }).then((response) => response.json())
   }
 
-  const { data } = useSWR<IMessage[]>('/api/message/read', fetcher, config)
+  const { data, mutate } = useSWR<IMessage[]>('/api/message/read', fetcher, config)
 
   useEffect(() => {
     if (data! !== messages) {
@@ -31,12 +31,25 @@ const Chatbox = () => {
   }, [data])
 
   const createHandler = async () => {
+    mutate(
+      [
+        ...messages,
+        {
+          id: '',
+          text: input,
+          memberId: user.members![0].id,
+          projectId: project.id,
+          createdAt: '',
+          updatedAt: '',
+        },
+      ],
+      false
+    )
     await create({
       text: input,
       memberId: user.members![0].id,
       projectId: project.id,
     })
-    mutate('/api/message/read')
   }
 
   return (
