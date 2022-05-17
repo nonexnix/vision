@@ -31,7 +31,7 @@ interface ICreate {
     dueAt: string
     memberId: string
     projectId: string
-    participants: { access?: boolean; memberId: string }[]
+    participants?: { access?: boolean; memberId: string }[]
   }) => void
   participant: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }) => void
   participants: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }[]) => void
