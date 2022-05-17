@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 import useSWR, { mutate, SWRConfiguration } from 'swr'
 import { IUser } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
