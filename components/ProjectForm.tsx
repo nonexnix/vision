@@ -36,8 +36,6 @@ const ProjectForm = () => {
     mutate('/api/user/read')
   }
 
-  if (user !== data) return <></>
-
   return (
     <div>
       <input type="text" value={input} onChange={(event) => setInput(event.target.value)} />
