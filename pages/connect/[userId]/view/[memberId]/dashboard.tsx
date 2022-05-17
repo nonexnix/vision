@@ -23,6 +23,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
     useClientStore.getState().read.project(initialProject)
+    useClientStore.getState().read.messages(initialMessages)
   }, [initialUser, initialProject])
 
   if (!user.id || !project.id) return <></>

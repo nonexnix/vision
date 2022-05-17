@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
-import { IMessage, IProject } from '../library/schemas/interfaces'
+import { IMessage } from '../library/schemas/interfaces'
 import useClientStore from '../library/stores/client'
 
 interface IProps {
@@ -22,20 +22,26 @@ const Chat = ({ initialMessages }: IProps) => {
 
   const config: SWRConfiguration = {
     fallbackData: initialMessages,
-    refreshInterval: 200,
+    refreshInterval: 100,
   }
 
   const { data } = useSWR<IMessage[]>('/api/message/read', fetcher, config)
 
   useEffect(() => {
-    if (!messages) useClientStore.getState().read.messages(data!)
-  }, [data, messages])
+    if (data!.length !== messages.length) {
+      useClientStore.getState().read.messages(data!)
+    }
+  }, [data])
 
-  if (!data || !messages) return <></>
+  if (data!.length !== messages.length) return <></>
 
-  console.log(data)
+  console.log('state', messages)
 
-  return <div>Chat</div>
+  return (
+    <div>
+      <h1>Chat</h1>
+    </div>
+  )
 }
 
 export default Chat
