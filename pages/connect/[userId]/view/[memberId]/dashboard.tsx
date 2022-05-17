@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useEffect } from 'react'
-import Chat from '../../../../../components/Chat'
+import Chatbox from '../../../../../components/chatbox'
 import Header from '../../../../../components/Header'
 import Layout from '../../../../../components/Layout'
 import Main from '../../../../../components/Main'
@@ -38,7 +38,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
         <Main>
           <section>Dashboard Page</section>
           <section>{project.name}</section>
-          <Chat initialMessages={initialMessages} />
+          <Chatbox />
         </Main>
       </Layout>
     </Page>
