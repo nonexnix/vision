@@ -2,7 +2,7 @@ interface IProps {
   children: React.ReactNode
 }
 
-const Main = ({ children }: IProps) => {
+const LayoutMain = ({ children }: IProps) => {
   return (
     <main>
       <div className="area">{children}</div>
@@ -10,4 +10,4 @@ const Main = ({ children }: IProps) => {
   )
 }
 
-export default Main
+export default LayoutMain

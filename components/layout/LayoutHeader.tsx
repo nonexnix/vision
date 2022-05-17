@@ -1,4 +1,4 @@
-const Header = () => {
+const LayoutHeader = () => {
   return (
     <header>
       <div className="area">HEADER</div>
@@ -6,4 +6,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default LayoutHeader

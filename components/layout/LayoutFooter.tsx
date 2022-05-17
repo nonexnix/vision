@@ -1,4 +1,4 @@
-const Footer = () => {
+const LayoutFooter = () => {
   return (
     <footer>
       <div className="area">FOOTER</div>
@@ -6,4 +6,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default LayoutFooter

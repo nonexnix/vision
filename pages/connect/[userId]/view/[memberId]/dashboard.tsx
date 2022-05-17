@@ -1,9 +1,10 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useEffect } from 'react'
 import Chatbox from '../../../../../components/chatbox'
-import Header from '../../../../../components/Header'
-import Layout from '../../../../../components/Layout'
-import Main from '../../../../../components/Main'
+import Layout from '../../../../../components/layout'
+import LayoutFooter from '../../../../../components/layout/LayoutFooter'
+import LayoutHeader from '../../../../../components/layout/LayoutHeader'
+import LayoutMain from '../../../../../components/layout/LayoutMain'
 import Page from '../../../../../components/Page'
 import type { IMessage, IProject, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
@@ -34,13 +35,14 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialProject, initialMessa
   return (
     <Page title={`Dashboard | @${user.username}`}>
       <Layout>
-        <Header />
-        <Main>
+        <LayoutHeader />
+        <LayoutMain>
           <section>Dashboard Page</section>
           <section>{project.name}</section>
-          <Chatbox />
-        </Main>
+        </LayoutMain>
+        <LayoutFooter />
       </Layout>
+      {/* <Chatbox /> */}
     </Page>
   )
 }

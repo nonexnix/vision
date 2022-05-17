@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import useSWR, { mutate, SWRConfiguration } from 'swr'
-import { IUser } from '../library/schemas/interfaces'
-import useClientStore from '../library/stores/client'
+import { IUser } from '../../library/schemas/interfaces'
+import useClientStore from '../../library/stores/client'
 
-const ProjectForm = () => {
+const ModalProject = () => {
   const [input, setInput] = useState('')
   const user = useClientStore((state) => state.user)
   const create = useClientStore((state) => state.create.project)
@@ -51,4 +51,4 @@ const ProjectForm = () => {
   )
 }
 
-export default ProjectForm
+export default ModalProject

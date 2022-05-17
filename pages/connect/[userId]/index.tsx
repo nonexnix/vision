@@ -1,10 +1,12 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import Header from '../../../components/Header'
-import Layout from '../../../components/Layout'
-import Main from '../../../components/Main'
+import Layout from '../../../components/layout'
+import LayoutFooter from '../../../components/layout/LayoutFooter'
+import LayoutHeader from '../../../components/layout/LayoutHeader'
+import LayoutMain from '../../../components/layout/LayoutMain'
+import Modal from '../../../components/modal'
+import ModalProject from '../../../components/modal/ModalProject'
 import Page from '../../../components/Page'
-import ProjectForm from '../../../components/ProjectForm'
 import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
@@ -28,12 +30,15 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
   return (
     <Page title={`Home | @${user!.username}`}>
       <Layout>
-        <Header />
-        <Main>
+        <LayoutHeader />
+        <LayoutMain>
           <section>Home Page</section>
-          <ProjectForm />
-        </Main>
+        </LayoutMain>
+        <LayoutFooter />
       </Layout>
+      {/* <Modal>
+        <ModalProject />
+      </Modal> */}
     </Page>
   )
 }
