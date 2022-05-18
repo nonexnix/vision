@@ -3,9 +3,9 @@ import Page from '../components/page'
 
 const Landing: NextPage = () => {
   return (
-    <Page title="Vision">
-      <h1>Welcome to Vision</h1>
-    </Page>
+    // <Page title="Vision">
+    <h1>Welcome to Vision</h1>
+    // {/* </Page> */}
   )
 }
 

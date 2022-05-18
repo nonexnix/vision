@@ -5,7 +5,7 @@ import Footer from '../../../../../components/footer'
 import Header from '../../../../../components/header'
 import Layout from '../../../../../components/layout'
 import Main from '../../../../../components/main'
-import Page from '../../../../../components/page'
+// import Page from '../../../../../components/page'
 import type { IMember, IMessage, IProject, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
@@ -28,16 +28,16 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProjec
   console.log('Dashoard Rendered')
 
   return (
-    <Page title="Dashboard">
+    // <Page title="Dashboard">
       <Layout>
         <Header />
         <Main>
           <section>Dashboard Page</section>
         </Main>
         <Footer />
+        <Chatbox initialMember={initialMember} initialProject={initialProject} initialMessages={initialMessages} />
       </Layout>
-      <Chatbox initialMember={initialMember} initialProject={initialProject} initialMessages={initialMessages} />
-    </Page>
+    // </Page>
   )
 }
 
