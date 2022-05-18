@@ -14,6 +14,7 @@ interface IProps {
 const Chatbox = ({ initialMember, initialProject, initialMessages }: IProps) => {
   const value = useFieldStore((state) => state.message)
   const set = useFieldStore((state) => state.set.message)
+  const clear = useFieldStore((state) => state.clear.message)
   const create = useClientStore((state) => state.create.message)
 
   const { data: messages, mutate } = useFetch<IMessage[]>('/api/message/read', initialProject.id, {
@@ -28,8 +29,12 @@ const Chatbox = ({ initialMember, initialProject, initialMessages }: IProps) => 
   console.log('Chatbox Rendered', messages)
 
   const handler = async () => {
-    mutate([...messages!, { ...value, memberId: initialMember.id }], false)
-    await create({ text: value.text, memberId: initialMember.id, projectId: initialProject.id })
+    if (value.text) {
+      const newData = { ...value, memberId: initialMember.id }
+      clear()
+      mutate([...messages!, newData], false)
+      await create({ text: newData.text, memberId: initialMember.id, projectId: initialProject.id })
+    }
   }
 
   return (
