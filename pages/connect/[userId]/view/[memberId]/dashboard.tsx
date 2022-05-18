@@ -36,7 +36,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProjec
         </Main>
         <Footer />
       </Layout>
-      <Chatbox initialMessages={initialMessages} projectId={initialProject.id} />
+      <Chatbox initialMember={initialMember} initialProject={initialProject} initialMessages={initialMessages} />
     </Page>
   )
 }
