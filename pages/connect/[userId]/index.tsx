@@ -1,44 +1,35 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import Layout from '../../../components/layout'
-import LayoutFooter from '../../../components/layout/LayoutFooter'
-import LayoutHeader from '../../../components/layout/LayoutHeader'
-import LayoutMain from '../../../components/layout/LayoutMain'
-import Modal from '../../../components/modal'
-import ModalProject from '../../../components/modal/modal-project'
-import Page from '../../../components/Page'
+import Page from '../../../components/page'
 import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
 import prisma from '../../../library/utilities/prisma'
+import Header from '../../../components/header'
+import Layout from '../../../components/layout'
+import Main from '../../../components/main'
+import Footer from '../../../components/footer'
 
 interface IProps {
   initialUser: IUser
 }
 
 const Home: NextPage<IProps> = ({ initialUser }) => {
-  const user = useClientStore((state) => state.user)
-
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
   }, [initialUser])
 
-  if (!user.id) return <></>
-
-  console.log(user)
+  console.log('Home Rendered')
 
   return (
-    <Page title={`Home | @${user!.username}`}>
+    <Page title="Home">
       <Layout>
-        <LayoutHeader />
-        <LayoutMain>
+        <Header />
+        <Main>
           <section>Home Page</section>
-        </LayoutMain>
-        <LayoutFooter />
+        </Main>
+        <Footer />
       </Layout>
-      {/* <Modal>
-        <ModalProject />
-      </Modal> */}
     </Page>
   )
 }
