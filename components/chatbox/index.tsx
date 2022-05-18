@@ -1,40 +1,38 @@
 import cuid from 'cuid'
 import { useEffect } from 'react'
 import useFetch from '../../library/hooks/fetch'
-import { IMember, IMessage, IProject } from '../../library/schemas/interfaces'
+import { IMessage } from '../../library/schemas/interfaces'
 import useClientStore from '../../library/stores/client'
 import useFieldStore from '../../library/stores/field'
-import phase from '../../library/utilities/phase'
 
-interface IProps {
-  initialMember: IMember
-  initialProject: IProject
-  initialMessages: IMessage[]
-}
-
-const Chatbox = ({ initialMember, initialProject, initialMessages }: IProps) => {
+const Chatbox = () => {
+  const member = useClientStore((state) => state.member)
+  const project = useClientStore((state) => state.project)
+  const messages = useClientStore((state) => state.messages)
   const value = useFieldStore((state) => state.message)
   const set = useFieldStore((state) => state.set.message)
   const clear = useFieldStore((state) => state.clear.message)
   const create = useClientStore((state) => state.create.message)
 
-  const { data: messages, mutate } = useFetch<IMessage[]>('/api/message/read', initialProject.id, {
-    fallbackData: initialMessages,
-    refreshInterval: 5000,
+  const { data, mutate } = useFetch<IMessage[]>('/api/message/read', project.id, {
+    fallbackData: messages,
+    refreshInterval: 1000,
   })
 
   useEffect(() => {
-    useClientStore.getState().read.messages(messages!)
-  }, [messages])
+    if (JSON.stringify(messages) !== JSON.stringify(data)) {
+      useClientStore.getState().read.messages(data!)
+    }
+  }, [messages, data])
 
   console.log('Chatbox Rendered', messages)
 
   const handler = async () => {
     if (value.text) {
-      const newData = { ...value, id: cuid(), memberId: initialMember.id }
+      const newData = { ...value, id: cuid(), memberId: member.id }
       clear()
       mutate([...messages!, newData], false)
-      await create({ text: newData.text, memberId: initialMember.id, projectId: initialProject.id })
+      await create({ text: newData.text, memberId: member.id, projectId: project.id })
     }
   }
 
@@ -50,7 +48,7 @@ const Chatbox = ({ initialMember, initialProject, initialMessages }: IProps) => 
         {messages?.map((message) => (
           <div
             key={message.id}
-            className={`${message.memberId === initialMember.id ? 'bg-blue-500 text-white ml-auto text-right' : 'bg-gray-500 text-white mr-auto text-left'} py-2 px-3 rounded`}>
+            className={`${message.memberId === member.id ? 'bg-blue-500 text-white ml-auto text-right' : 'bg-gray-500 text-white mr-auto text-left'} py-2 px-3 rounded`}>
             <div className="text-right">{message.text}</div>
           </div>
         ))}
