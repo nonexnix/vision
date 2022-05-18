@@ -19,7 +19,7 @@ const Chatbox = ({ initialMember, initialProject, initialMessages }: IProps) => 
 
   const { data: messages, mutate } = useFetch<IMessage[]>('/api/message/read', initialProject.id, {
     fallbackData: initialMessages,
-    refreshInterval: 100,
+    refreshInterval: 5000,
   })
 
   useEffect(() => {
