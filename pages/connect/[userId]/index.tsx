@@ -1,6 +1,5 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import Page from '../../../components/page'
 import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
@@ -9,6 +8,7 @@ import Header from '../../../components/header'
 import Layout from '../../../components/layout'
 import Main from '../../../components/main'
 import Footer from '../../../components/footer'
+import Page from '../../../components/page'
 
 interface IProps {
   initialUser: IUser
