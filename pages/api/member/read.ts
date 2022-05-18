@@ -8,10 +8,10 @@ const handler: THandler = async (request, response) => {
   if (request.method === 'POST') {
     const body = JSON.parse(request.body)
     try {
-      const messages = await prisma.message.findMany({
-        where: { projectId: body.id },
+      const member = await prisma.member.findUnique({
+        where: { id: String(body!.id) },
       })
-      response.status(200).json(messages)
+      response.status(200).json(member)
     } catch (error) {
       console.error(error)
       response.status(500).json(postman(500))
