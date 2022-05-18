@@ -5,7 +5,7 @@ import Footer from '../../../../../components/footer'
 import Header from '../../../../../components/header'
 import Layout from '../../../../../components/layout'
 import Main from '../../../../../components/main'
-// import Page from '../../../../../components/page'
+import Page from '../../../../../components/page'
 import type { IMember, IMessage, IProject, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
@@ -19,25 +19,33 @@ interface IProps {
 }
 
 const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProject, initialMessages }) => {
+  const user = useClientStore((state) => state.user)
+  const member = useClientStore((state) => state.member)
+  const project = useClientStore((state) => state.project)
+
   useEffect(() => {
     useClientStore.getState().read.user(initialUser)
     useClientStore.getState().read.member(initialMember)
     useClientStore.getState().read.project(initialProject)
-  }, [initialUser, initialMember, initialProject])
+    useClientStore.getState().read.messages(initialMessages)
+  }, [initialUser, initialMember, initialProject, initialMessages])
+
+  if (!user.id || !member.id || !project.id) return <></>
 
   console.log('Dashoard Rendered')
 
   return (
-    // <Page title="Dashboard">
+    <Page title="Dashboard">
       <Layout>
         <Header />
         <Main>
           <section>Dashboard Page</section>
         </Main>
         <Footer />
-        <Chatbox initialMember={initialMember} initialProject={initialProject} initialMessages={initialMessages} />
+        <Chatbox />
       </Layout>
-    // </Page>
+      //{' '}
+    </Page>
   )
 }
 
