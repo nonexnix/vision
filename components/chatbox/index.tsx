@@ -16,7 +16,7 @@ const Chatbox = () => {
 
   const { data, mutate } = useFetch<IMessage[]>('/api/message/read', project.id, {
     fallbackData: messages,
-    refreshInterval: 1000,
+    refreshInterval: 20000,
   })
 
   useEffect(() => {
@@ -24,6 +24,8 @@ const Chatbox = () => {
       useClientStore.getState().read.messages(data!)
     }
   }, [messages, data])
+
+  if (JSON.stringify(messages) !== JSON.stringify(data)) return <></>
 
   console.log('Chatbox Rendered', messages)
 
