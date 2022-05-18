@@ -1,3 +1,4 @@
+import cuid from 'cuid'
 import { useEffect } from 'react'
 import useFetch from '../../library/hooks/fetch'
 import { IMember, IMessage, IProject } from '../../library/schemas/interfaces'
@@ -30,7 +31,7 @@ const Chatbox = ({ initialMember, initialProject, initialMessages }: IProps) => 
 
   const handler = async () => {
     if (value.text) {
-      const newData = { ...value, memberId: initialMember.id }
+      const newData = { ...value, id: cuid(), memberId: initialMember.id }
       clear()
       mutate([...messages!, newData], false)
       await create({ text: newData.text, memberId: initialMember.id, projectId: initialProject.id })
