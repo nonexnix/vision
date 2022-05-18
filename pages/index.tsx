@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import Page from '../components/page'
+import Foundation from '../components/foundation'
 
 const Landing: NextPage = () => {
   return (
-    <Page title="Vision">
+    <Foundation title="Vision">
       <h1>Welcome to Vision</h1>
-    </Page>
+    </Foundation>
   )
 }
 

@@ -5,11 +5,11 @@ import Footer from '../../../../../components/footer'
 import Header from '../../../../../components/header'
 import Layout from '../../../../../components/layout'
 import Main from '../../../../../components/main'
-import Page from '../../../../../components/page'
 import type { IMember, IMessage, IProject, IUser } from '../../../../../library/schemas/interfaces'
 import useClientStore from '../../../../../library/stores/client'
 import objectified from '../../../../../library/utilities/objectified'
 import prisma from '../../../../../library/utilities/prisma'
+import Foundation from '../../../../../components/foundation'
 
 interface IProps {
   initialUser: IUser
@@ -35,7 +35,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProjec
   console.log('Dashoard Rendered')
 
   return (
-    <Page title="Dashboard">
+    <Foundation title="Dashboard">
       <Layout>
         <Header />
         <Main>
@@ -45,7 +45,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProjec
         <Chatbox />
       </Layout>
       //{' '}
-    </Page>
+    </Foundation>
   )
 }
 

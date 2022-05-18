@@ -8,7 +8,7 @@ import Header from '../../../components/header'
 import Layout from '../../../components/layout'
 import Main from '../../../components/main'
 import Footer from '../../../components/footer'
-import Page from '../../../components/page'
+import Foundation from '../../../components/foundation'
 
 interface IProps {
   initialUser: IUser
@@ -22,7 +22,7 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
   console.log('Home Rendered')
 
   return (
-    <Page title="Home">
+    <Foundation title="Home">
       <Layout>
         <Header />
         <Main>
@@ -31,7 +31,7 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
         <Footer />
       </Layout>
       //{' '}
-    </Page>
+    </Foundation>
   )
 }
 

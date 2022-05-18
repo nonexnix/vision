@@ -5,7 +5,7 @@ interface IProps {
   title: string
 }
 
-const Page = ({ children, title }: IProps) => {
+const Foundation = ({ children, title }: IProps) => {
   return (
     <>
       <Head>
@@ -18,4 +18,4 @@ const Page = ({ children, title }: IProps) => {
   )
 }
 
-export default Page
+export default Foundation
