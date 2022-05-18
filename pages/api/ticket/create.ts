@@ -11,6 +11,7 @@ const handler: THandler = async (request, response) => {
       await prisma.ticket.create({
         data: {
           code: body.code,
+          token: body.token,
           userId: body.userId,
           projectId: body.projectId,
         },
