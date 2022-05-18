@@ -32,7 +32,11 @@ const Chatbox = () => {
       const newData = { ...value, id: cuid(), memberId: member.id }
       clear()
       mutate([...messages!, newData], false)
-      await create({ text: newData.text, memberId: member.id, projectId: project.id })
+      await create({
+        text: newData.text,
+        memberId: member.id,
+        projectId: project.id,
+      })
     }
   }
 
@@ -48,7 +52,11 @@ const Chatbox = () => {
         {messages?.map((message) => (
           <div
             key={message.id}
-            className={`${message.memberId === member.id ? 'bg-blue-500 text-white ml-auto text-right' : 'bg-gray-500 text-white mr-auto text-left'} py-2 px-3 rounded`}>
+            className={`${
+              message.memberId === member.id
+                ? 'bg-blue-500 text-white ml-auto text-right'
+                : 'bg-gray-500 text-white mr-auto text-left'
+            } py-2 px-3 rounded`}>
             <div className="text-right">{message.text}</div>
           </div>
         ))}
