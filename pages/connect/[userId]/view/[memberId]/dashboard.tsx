@@ -1,5 +1,5 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Chatbox from '../../../../../components/chatbox'
 import Footer from '../../../../../components/footer'
 import Header from '../../../../../components/header'
@@ -19,18 +19,17 @@ interface IProps {
 }
 
 const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProject, initialMessages }) => {
-  const user = useClientStore((state) => state.user)
-  const member = useClientStore((state) => state.member)
-  const project = useClientStore((state) => state.project)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
+    setReady(true)
     useClientStore.getState().read.user(initialUser)
     useClientStore.getState().read.member(initialMember)
     useClientStore.getState().read.project(initialProject)
     useClientStore.getState().read.messages(initialMessages)
   }, [initialUser, initialMember, initialProject, initialMessages])
 
-  if (!user.id || !member.id || !project.id) return <></>
+  if (!ready) return <></>
 
   console.log('Dashoard Rendered')
 

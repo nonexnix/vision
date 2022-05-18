@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { IUser } from '../../../library/schemas/interfaces'
 import useClientStore from '../../../library/stores/client'
 import objectified from '../../../library/utilities/objectified'
@@ -15,9 +15,14 @@ interface IProps {
 }
 
 const Home: NextPage<IProps> = ({ initialUser }) => {
+  const [ready, setReady] = useState(false)
+
   useEffect(() => {
+    setReady(true)
     useClientStore.getState().read.user(initialUser)
   }, [initialUser])
+
+  if (!ready) return <></>
 
   console.log('Home Rendered')
 
