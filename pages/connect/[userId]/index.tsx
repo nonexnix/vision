@@ -30,7 +30,6 @@ const Home: NextPage<IProps> = ({ initialUser }) => {
         </Main>
         <Footer />
       </Layout>
-      //{' '}
     </Foundation>
   )
 }
