@@ -44,7 +44,6 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProjec
         <Footer />
         <Chatbox />
       </Layout>
-      //{' '}
     </Foundation>
   )
 }
