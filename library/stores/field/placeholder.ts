@@ -5,22 +5,22 @@ import moment from 'moment'
 
 const placeholder: { project: IProject; message: IMessage } = {
   project: {
-    id: cuid(),
+    id: '',
     name: '',
     description: '',
     code: '',
     over: false,
     preserve: true,
-    createdAt: phase(moment().format()),
-    updatedAt: phase(moment().format()),
+    createdAt: phase(moment().format(), 'iso'),
+    updatedAt: phase(moment().format(), 'iso'),
     dueAt: '',
     userId: '',
   },
   message: {
-    id: cuid(),
+    id: '',
     text: '',
-    createdAt: phase(moment().format()),
-    updatedAt: phase(moment().format()),
+    updatedAt: phase(moment().format(), 'iso'),
+    createdAt: phase(moment().format(), 'iso'),
     memberId: '',
     projectId: '',
   },
