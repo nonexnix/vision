@@ -1,8 +1,9 @@
-import type { IMessage, IProject, IUser } from '../../schemas/interfaces'
+import type { IMember, IMessage, IProject, IUser } from '../../schemas/interfaces'
 import type { TPriority } from '../../schemas/types'
 
 interface IUseClientStore {
   user: IUser
+  member: IMember
   project: IProject
   messages: IMessage[]
   loader: boolean
@@ -14,6 +15,7 @@ interface IUseClientStore {
 
 interface IRead {
   user: (payload: IUser) => void
+  member: (payload: IMember) => void
   project: (payload: IProject) => void
   messages: (payload: IMessage[]) => void
 }

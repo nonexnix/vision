@@ -5,11 +5,13 @@ import placeholder from './placeholder'
 
 const useClientStore = create<IUseClientStore>((set, get) => ({
   user: placeholder.user,
+  member: placeholder.member,
   project: placeholder.project,
   messages: placeholder.messages,
   loader: false,
   read: {
     user: (payload) => set({ user: payload }),
+    member: (payload) => set({ member: payload }),
     project: (payload) => set({ project: payload }),
     messages: (payload) => set({ messages: payload }),
   },
