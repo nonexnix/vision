@@ -36,6 +36,11 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
       await record('project', 'CREATE', payload)
       set({ loader: !get().loader })
     },
+    role: async (payload) => {
+      set({ loader: !get().loader })
+      await record('role', 'CREATE', payload)
+      set({ loader: !get().loader })
+    },
     message: async (payload) => {
       set({ loader: !get().loader })
       await record('message', 'CREATE', payload)
