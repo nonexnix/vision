@@ -1,5 +1,5 @@
 import type { IMember, IMessage, IProject, IUser } from '../../schemas/interfaces'
-import type { TMark, TPriority } from '../../schemas/types'
+import type { TEmoji, TMark, TPriority } from '../../schemas/types'
 
 interface IUseClientStore {
   user: IUser
@@ -26,6 +26,7 @@ interface ICreate {
   members: (payload: { userId: string; projectId: string }[]) => void
   project: (payload: { name: string; description: string; dueAt: string; userId: string }) => void
   message: (payload: { text: string; memberId: string; projectId: string }) => void
+  reaction: (payload: { emoji: TEmoji; memberId: string; messageId: string }) => void
   task: (payload: {
     name: string
     description: string
