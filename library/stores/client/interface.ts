@@ -35,6 +35,13 @@ interface ICreate {
     projectId: string
     participants?: { access?: boolean; memberId: string }[]
   }) => void
+  suggestion: (payload: {
+    name: string
+    description: string
+    memberId: string
+    projectId: string
+    participants?: { access?: boolean; memberId: string }[]
+  }) => void
   participant: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }) => void
   participants: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }[]) => void
   ticket: (payload: { code: string; userId: string; projectId: string }) => void

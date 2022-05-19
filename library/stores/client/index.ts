@@ -46,6 +46,11 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
       await record('task', 'CREATE', payload)
       set({ loader: !get().loader })
     },
+    suggestion: async (payload) => {
+      set({ loader: !get().loader })
+      await record('suggestion', 'CREATE', payload)
+      set({ loader: !get().loader })
+    },
     participant: async (payload) => {
       set({ loader: !get().loader })
       await record('participant', 'CREATE', payload)
