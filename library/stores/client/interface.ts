@@ -1,5 +1,5 @@
 import type { IMember, IMessage, IProject, IUser } from '../../schemas/interfaces'
-import type { TPriority } from '../../schemas/types'
+import type { TMark, TPriority } from '../../schemas/types'
 
 interface IUseClientStore {
   user: IUser
@@ -51,6 +51,7 @@ interface ICreate {
     projectId: string
     participants?: { access?: boolean; memberId: string }[]
   }) => void
+  vote: (payload: { mark: TMark; memberId: string; suggestionId: string }) => void
   file: (payload: {
     name: string
     description: string
