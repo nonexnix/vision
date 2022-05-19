@@ -35,6 +35,15 @@ interface ICreate {
     projectId: string
     participants?: { access?: boolean; memberId: string }[]
   }) => void
+  todo: (payload: {
+    name: string
+    description: string
+    priority: string
+    dueAt: string
+    memberId: string
+    taskId: string
+    participants?: { access?: boolean; memberId: string }[]
+  }) => void
   suggestion: (payload: {
     name: string
     description: string
