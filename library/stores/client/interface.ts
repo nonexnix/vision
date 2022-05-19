@@ -26,6 +26,7 @@ interface ICreate {
   members: (payload: { userId: string; projectId: string }[]) => void
   project: (payload: { name: string; description: string; dueAt: string; userId: string }) => void
   role: (payload: { name: string; description: string; projectId: string }) => void
+  authorization: (payload: { memberId: string; roleId: string }) => void
   message: (payload: { text: string; memberId: string; projectId: string }) => void
   reaction: (payload: { emoji: TEmoji; memberId: string; messageId: string }) => void
   task: (payload: {
