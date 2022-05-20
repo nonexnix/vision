@@ -29,12 +29,12 @@ const Chatbox = () => {
 
   console.log('Chatbox Rendered', messages)
 
-  const handler = async () => {
+  const handler = () => {
     if (value.text) {
-      const newData = { ...value, id: cuid(), memberId: member.id }
+      const newData: IMessage = { ...value, id: cuid(), memberId: member.id }
       clear()
       mutate([...messages!, newData], false)
-      await create({
+      create({
         text: newData.text,
         memberId: member.id,
         projectId: project.id,
