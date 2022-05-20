@@ -1,4 +1,4 @@
-import { TStatus } from '../types'
+import { TPriority } from '../types'
 import IMember from './member'
 import IParticipant from './participant'
 import ITask from './task'
@@ -7,7 +7,7 @@ interface ITodo {
   id: string
   name: string
   description: string
-  priority: TStatus
+  priority: TPriority
   over: boolean
   createdAt: string | Date
   updatedAt: string | Date
@@ -16,7 +16,7 @@ interface ITodo {
   memberId: string
   task?: ITask
   taskId: string
-  participants: IParticipant[]
+  participants?: IParticipant[]
 }
 
 export default ITodo
