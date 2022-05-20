@@ -18,7 +18,7 @@ const Chatbox = () => {
     fallbackData: messages,
     refreshInterval: 20000,
   })
-
+  console.log(member)
   useEffect(() => {
     if (JSON.stringify(messages) !== JSON.stringify(data)) {
       useClientStore.getState().read.messages(data!)
@@ -31,7 +31,7 @@ const Chatbox = () => {
 
   const handler = () => {
     if (value.text) {
-      const newData: IMessage = { ...value, id: cuid(), memberId: member.id }
+      const newData: IMessage = { ...value, id: cuid(), member: member }
       clear()
       mutate([...messages!, newData], false)
       create({
@@ -55,11 +55,12 @@ const Chatbox = () => {
           <div
             key={message.id}
             className={`${
-              message.memberId === member.id
+              message.member?.id === member.id
                 ? 'bg-blue-500 text-white ml-auto text-right'
                 : 'bg-gray-500 text-white mr-auto text-left'
             } py-2 px-3 rounded`}>
             <div className="text-right">{message.text}</div>
+            <div className="text-right">{message.member?.user?.username}</div>
           </div>
         ))}
       </div>
