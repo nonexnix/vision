@@ -10,6 +10,9 @@ const handler: THandler = async (request, response) => {
     try {
       const member = await prisma.member.findUnique({
         where: { id: String(body!.id) },
+        include: {
+          user: true,
+        },
       })
       response.status(200).json(member)
     } catch (error) {

@@ -83,6 +83,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const member = await prisma.member.findUnique({
     where: { id: String(params!.memberId) },
+    include: {
+      user: true,
+    },
   })
 
   const project = await prisma.project.findUnique({
@@ -98,6 +101,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const messages = await prisma.message.findMany({
     where: { projectId: member!.projectId },
+    include: {
+      member: {
+        include: {
+          user: true,
+        },
+      },
+    },
   })
 
   return {

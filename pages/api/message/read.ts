@@ -10,6 +10,13 @@ const handler: THandler = async (request, response) => {
     try {
       const messages = await prisma.message.findMany({
         where: { projectId: body.id },
+        include: {
+          member: {
+            include: {
+              user: true,
+            },
+          },
+        },
       })
       response.status(200).json(messages)
     } catch (error) {
