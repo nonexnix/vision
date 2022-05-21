@@ -80,8 +80,16 @@ interface IDelete {
   user: (payload: { id: string }) => void
   member: (payload: { id: string }) => void
   project: (payload: { id: string }) => void
+  role: (payload: { id: string }) => void
+  authorization: (payload: { id: string }) => void
   message: (payload: { id: string }) => void
+  reaction: (payload: { id: string }) => void
   task: (payload: { id: string }) => void
+  todo: (payload: { id: string }) => void
+  suggestion: (payload: { id: string }) => void
+  vote: (payload: { id: string }) => void
+  file: (payload: { id: string }) => void
+  announcement: (payload: { id: string }) => void
   participant: (payload: { id: string }) => void
   ticket: (payload: { id: string }) => void
 }
