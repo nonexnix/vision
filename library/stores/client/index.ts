@@ -118,14 +118,54 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
       await record('project', 'DELETE', payload)
       set({ loader: !get().loader })
     },
+    role: async (payload) => {
+      set({ loader: !get().loader })
+      await record('role', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    authorization: async (payload) => {
+      set({ loader: !get().loader })
+      await record('authorization', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
     message: async (payload) => {
       set({ loader: !get().loader })
       await record('message', 'DELETE', payload)
       set({ loader: !get().loader })
     },
+    reaction: async (payload) => {
+      set({ loader: !get().loader })
+      await record('reaction', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
     task: async (payload) => {
       set({ loader: !get().loader })
       await record('task', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    todo: async (payload) => {
+      set({ loader: !get().loader })
+      await record('todo', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    suggestion: async (payload) => {
+      set({ loader: !get().loader })
+      await record('suggestion', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    vote: async (payload) => {
+      set({ loader: !get().loader })
+      await record('vote', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    file: async (payload) => {
+      set({ loader: !get().loader })
+      await record('file', 'DELETE', payload)
+      set({ loader: !get().loader })
+    },
+    announcement: async (payload) => {
+      set({ loader: !get().loader })
+      await record('announcement', 'DELETE', payload)
       set({ loader: !get().loader })
     },
     participant: async (payload) => {
@@ -196,6 +236,18 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
         set({ loader: !get().loader })
       },
     },
+    role: {
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('role', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('role', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
     message: {
       text: async (payload) => {
         set({ loader: !get().loader })
@@ -222,6 +274,98 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
       over: async (payload) => {
         set({ loader: !get().loader })
         await record('task', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      dueAt: async (payload) => {
+        set({ loader: !get().loader })
+        await record('task', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
+    todo: {
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('todo', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('todo', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      priority: async (payload) => {
+        set({ loader: !get().loader })
+        await record('todo', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      over: async (payload) => {
+        set({ loader: !get().loader })
+        await record('todo', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      dueAt: async (payload) => {
+        set({ loader: !get().loader })
+        await record('todo', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
+    suggestion: {
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('suggestion', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('suggestion', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      status: async (payload) => {
+        set({ loader: !get().loader })
+        await record('suggestion', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
+    vote: {
+      mark: async (payload) => {
+        set({ loader: !get().loader })
+        await record('vote', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
+    file: {
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('file', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('file', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      status: async (payload) => {
+        set({ loader: !get().loader })
+        await record('file', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
+    announcement: {
+      name: async (payload) => {
+        set({ loader: !get().loader })
+        await record('announcement', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      description: async (payload) => {
+        set({ loader: !get().loader })
+        await record('announcement', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
+    participant: {
+      access: async (payload) => {
+        set({ loader: !get().loader })
+        await record('access', 'UPDATE', payload)
         set({ loader: !get().loader })
       },
     },
