@@ -1,5 +1,5 @@
 import type { IMember, IMessage, IProject, IUser } from '../../schemas/interfaces'
-import type { TEmoji, TMark, TPriority } from '../../schemas/types'
+import type { TEmoji, TMark, TPriority, TStatus } from '../../schemas/types'
 
 interface IUseClientStore {
   user: IUser
@@ -111,6 +111,10 @@ interface IUpdate {
     preserve: (payload: { id: string; key: 'preserve'; value: boolean }) => void
     dueAt: (payload: { id: string; key: 'dueAt'; value: string }) => void
   }
+  role: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'description'; value: string }) => void
+  }
   message: {
     text: (payload: { id: string; key: 'text'; value: string }) => void
   }
@@ -119,6 +123,34 @@ interface IUpdate {
     description: (payload: { id: string; key: 'description'; value: string }) => void
     priority: (payload: { id: string; key: 'priority'; value: TPriority }) => void
     over: (payload: { id: string; key: 'over'; value: boolean }) => void
+    dueAt: (payload: { id: string; key: 'dueAt'; value: string }) => void
+  }
+  todo: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'description'; value: string }) => void
+    priority: (payload: { id: string; key: 'priority'; value: TPriority }) => void
+    over: (payload: { id: string; key: 'over'; value: boolean }) => void
+    dueAt: (payload: { id: string; key: 'dueAt'; value: string }) => void
+  }
+  suggestion: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'description'; value: string }) => void
+    status: (payload: { id: string; key: 'status'; value: TStatus }) => void
+  }
+  vote: {
+    mark: (payload: { id: string; key: 'mark'; value: TMark }) => void
+  }
+  file: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'description'; value: string }) => void
+    status: (payload: { id: string; key: 'status'; value: TStatus }) => void
+  }
+  announcement: {
+    name: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'description'; value: string }) => void
+  }
+  participant: {
+    access: (payload: { id: string; key: 'access'; value: boolean }) => void
   }
 }
 
