@@ -3,30 +3,40 @@ import IUseFieldStore from './interface'
 import placeholder from './placeholder'
 
 const useFieldStore = create<IUseFieldStore>((set) => ({
-  project: placeholder.project,
-  message: placeholder.message,
-  task: placeholder.task,
-  todo: placeholder.todo,
-  suggestion: placeholder.suggestion,
-  file: placeholder.file,
-  announcement: placeholder.announcement,
-  set: {
-    project: (payload) => set({ project: payload }),
-    message: (payload) => set({ message: payload }),
-    task: (payload) => set({ task: payload }),
-    todo: (payload) => set({ todo: payload }),
-    suggestion: (payload) => set({ suggestion: payload }),
-    file: (payload) => set({ file: payload }),
-    announcement: (payload) => set({ announcement: payload }),
+  project: {
+    value: placeholder.project,
+    set: (payload) => set((state) => ({ project: { ...state.project, value: payload } })),
+    clear: () => set((state) => ({ project: { ...state.project, value: placeholder.project } })),
   },
-  clear: {
-    project: () => set({ project: placeholder.project }),
-    message: () => set({ message: placeholder.message }),
-    task: () => set({ task: placeholder.task }),
-    todo: () => set({ todo: placeholder.todo }),
-    suggestion: () => set({ suggestion: placeholder.suggestion }),
-    file: () => set({ file: placeholder.file }),
-    announcement: () => set({ announcement: placeholder.announcement }),
+  message: {
+    value: placeholder.message,
+    set: (payload) => set((state) => ({ message: { ...state.message, value: payload } })),
+    clear: () => set((state) => ({ message: { ...state.message, value: placeholder.message } })),
+  },
+  task: {
+    value: placeholder.task,
+    set: (payload) => set((state) => ({ task: { ...state.task, value: payload } })),
+    clear: () => set((state) => ({ task: { ...state.task, value: placeholder.task } })),
+  },
+  todo: {
+    value: placeholder.todo,
+    set: (payload) => set((state) => ({ todo: { ...state.todo, value: payload } })),
+    clear: () => set((state) => ({ todo: { ...state.todo, value: placeholder.todo } })),
+  },
+  suggestion: {
+    value: placeholder.suggestion,
+    set: (payload) => set((state) => ({ suggestion: { ...state.suggestion, value: payload } })),
+    clear: () => set((state) => ({ suggestion: { ...state.suggestion, value: placeholder.suggestion } })),
+  },
+  file: {
+    value: placeholder.file,
+    set: (payload) => set((state) => ({ file: { ...state.file, value: payload } })),
+    clear: () => set((state) => ({ file: { ...state.file, value: placeholder.file } })),
+  },
+  announcement: {
+    value: placeholder.announcement,
+    set: (payload) => set((state) => ({ announcement: { ...state.announcement, value: payload } })),
+    clear: () => set((state) => ({ announcement: { ...state.announcement, value: placeholder.announcement } })),
   },
 }))
 

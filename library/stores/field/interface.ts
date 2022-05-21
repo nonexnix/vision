@@ -2,30 +2,40 @@ import { IAnnouncement, IMessage, IProject, ISuggestion, ITask, ITodo } from '..
 import IFile from '../../schemas/interfaces/file'
 
 interface IUseFieldStore {
-  project: IProject
-  message: IMessage
-  task: ITask
-  todo: ITodo
-  suggestion: ISuggestion
-  file: IFile
-  announcement: IAnnouncement
-  set: {
-    project: (payload: IProject) => void
-    message: (payload: IMessage) => void
-    task: (payload: ITask) => void
-    todo: (payload: ITodo) => void
-    suggestion: (payload: ISuggestion) => void
-    file: (payload: IFile) => void
-    announcement: (payload: IAnnouncement) => void
+  project: {
+    value: IProject
+    set: (payload: IProject) => void
+    clear: () => void
   }
-  clear: {
-    project: (payload: IProject) => void
-    message: () => void
-    task: () => void
-    todo: () => void
-    suggestion: () => void
-    file: () => void
-    announcement: () => void
+  message: {
+    value: IMessage
+    set: (payload: IMessage) => void
+    clear: () => void
+  }
+  task: {
+    value: ITask
+    set: (payload: ITask) => void
+    clear: () => void
+  }
+  todo: {
+    value: ITodo
+    set: (payload: ITodo) => void
+    clear: () => void
+  }
+  suggestion: {
+    value: ISuggestion
+    set: (payload: ISuggestion) => void
+    clear: () => void
+  }
+  file: {
+    value: IFile
+    set: (payload: IFile) => void
+    clear: () => void
+  }
+  announcement: {
+    value: IAnnouncement
+    set: (payload: IAnnouncement) => void
+    clear: () => void
   }
 }
 
