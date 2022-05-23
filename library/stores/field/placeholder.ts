@@ -1,4 +1,4 @@
-import { IAnnouncement, IMessage, IProject, ISuggestion, ITask, ITodo } from '../../schemas/interfaces'
+import { IAnnouncement, IMember, IMessage, IParticipant, IProject, ISuggestion, ITask, ITodo } from '../../schemas/interfaces'
 import phase from '../../utilities/phase'
 import moment from 'moment'
 import IFile from '../../schemas/interfaces/file'
@@ -12,6 +12,7 @@ interface IPlaceholder {
   suggestion: ISuggestion
   file: IFile
   announcement: IAnnouncement
+  assign: IParticipant[] | IMember[]
 }
 
 const placeholder: IPlaceholder = {
@@ -93,6 +94,7 @@ const placeholder: IPlaceholder = {
     memberId: '',
     projectId: '',
   },
+  assign: []
 }
 
 export default placeholder
