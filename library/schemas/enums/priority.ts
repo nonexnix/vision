@@ -1,7 +1,7 @@
 enum EPriority {
   LOW = 'LOW',
   MEDIUM = 'MEDIUM',
-  HIGH = 'MEDIUM',
+  HIGH = 'HIGH',
 }
 
 export default EPriority

@@ -1,3 +1,3 @@
-type TPriority = 'LOW' | 'MEDIUM' | 'MEDIUM'
+type TPriority = 'LOW' | 'MEDIUM' | 'HIGH'
 
 export default TPriority
