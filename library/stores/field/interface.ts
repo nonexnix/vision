@@ -1,4 +1,13 @@
-import { IAnnouncement, IMessage, IProject, ISuggestion, ITask, ITodo } from '../../schemas/interfaces'
+import {
+  IAnnouncement,
+  IMember,
+  IMessage,
+  IParticipant,
+  IProject,
+  ISuggestion,
+  ITask,
+  ITodo,
+} from '../../schemas/interfaces'
 import IFile from '../../schemas/interfaces/file'
 
 interface IUseFieldStore {
@@ -35,6 +44,11 @@ interface IUseFieldStore {
   announcement: {
     value: IAnnouncement
     set: (payload: IAnnouncement) => void
+    clear: () => void
+  }
+  assign: {
+    value: IParticipant[] | IMember[]
+    set: (payload: IParticipant[] | IMember[]) => void
     clear: () => void
   }
 }
