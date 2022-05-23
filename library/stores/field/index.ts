@@ -38,6 +38,11 @@ const useFieldStore = create<IUseFieldStore>((set) => ({
     set: (payload) => set((state) => ({ announcement: { ...state.announcement, value: payload } })),
     clear: () => set((state) => ({ announcement: { ...state.announcement, value: placeholder.announcement } })),
   },
+  assign: {
+    value: placeholder.assign,
+    set: (payload) => set((state) => ({ assign: { ...state.assign, value: payload } })),
+    clear: () => set((state) => ({ assign: { ...state.assign, value: placeholder.assign } })),
+  },
 }))
 
 export default useFieldStore
