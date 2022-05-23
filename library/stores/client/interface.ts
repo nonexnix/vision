@@ -101,12 +101,12 @@ interface IUpdate {
     lastName: (payload: { id: string; key: 'lastName'; value: string }) => void
   }
   member: {
-    rating: (payload: { id: string; key: 'lastName'; value: string }) => void
-    active: (payload: { id: string; key: 'lastName'; value: string }) => void
+    rating: (payload: { id: string; key: 'rating'; value: number }) => void
+    active: (payload: { id: string; key: 'active'; value: boolean }) => void
   }
   project: {
     name: (payload: { id: string; key: 'name'; value: string }) => void
-    description: (payload: { id: string; key: 'name'; value: string }) => void
+    description: (payload: { id: string; key: 'description'; value: string }) => void
     over: (payload: { id: string; key: 'over'; value: boolean }) => void
     preserve: (payload: { id: string; key: 'preserve'; value: boolean }) => void
     dueAt: (payload: { id: string; key: 'dueAt'; value: string }) => void
