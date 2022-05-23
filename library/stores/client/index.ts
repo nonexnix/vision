@@ -26,11 +26,6 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
       await record('member', 'CREATE', payload)
       set({ loader: !get().loader })
     },
-    members: async (payload) => {
-      set({ loader: !get().loader })
-      await payload.forEach(({ userId, projectId }) => record('members', 'CREATE', { userId, projectId }))
-      set({ loader: !get().loader })
-    },
     project: async (payload) => {
       set({ loader: !get().loader })
       await record('project', 'CREATE', payload)
@@ -89,11 +84,6 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
     participant: async (payload) => {
       set({ loader: !get().loader })
       await record('participant', 'CREATE', payload)
-      set({ loader: !get().loader })
-    },
-    participants: async (payload) => {
-      set({ loader: !get().loader })
-      await payload.forEach(({ memberId, key, value }) => record('participants', 'CREATE', { memberId, key, value }))
       set({ loader: !get().loader })
     },
     ticket: async (payload) => {

@@ -23,7 +23,6 @@ interface IRead {
 interface ICreate {
   user: (payload: { email: string; username: string; firstName: string; lastName: string; image?: string }) => void
   member: (payload: { userId: string; projectId: string }) => void
-  members: (payload: { userId: string; projectId: string }[]) => void
   project: (payload: { name: string; description: string; dueAt: string; userId: string }) => void
   role: (payload: { name: string; description: string; projectId: string }) => void
   authorization: (payload: { memberId: string; roleId: string }) => void
@@ -72,7 +71,6 @@ interface ICreate {
     participants?: { access?: boolean; memberId: string }[]
   }) => void
   participant: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }) => void
-  participants: (payload: { access?: boolean; memberId: string; key: IParticipantKey; value: string }[]) => void
   ticket: (payload: { code: string; userId: string; projectId: string }) => void
 }
 
