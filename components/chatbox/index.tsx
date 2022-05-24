@@ -1,6 +1,6 @@
 import cuid from 'cuid'
 import { useEffect } from 'react'
-import useFetch from '../../library/hooks/fetch'
+import useFetch from '../../library/hooks/use-fetch'
 import { IMessage } from '../../library/schemas/interfaces'
 import useClientStore from '../../library/stores/client'
 import useFieldStore from '../../library/stores/field'
