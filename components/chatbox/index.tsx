@@ -17,8 +17,6 @@ const Chatbox = () => {
     refreshInterval: 20000,
   })
 
-  console.log(member)
-  
   useEffect(() => {
     if (JSON.stringify(messages) !== JSON.stringify(data)) {
       useClientStore.getState().read.messages(data!)
@@ -26,8 +24,6 @@ const Chatbox = () => {
   }, [messages, data])
 
   if (JSON.stringify(messages) !== JSON.stringify(data)) return <></>
-
-  console.log('Chatbox Rendered', messages)
 
   const handler = () => {
     if (messageField.value.text) {
