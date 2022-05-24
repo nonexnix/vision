@@ -16,7 +16,19 @@ const handler: THandler = async (request, response) => {
           permanent: body.permanent && body.permanent,
           constant: body.constant && body.constant,
           projectId: body.projectId,
-          permission: { create: {} },
+          permission: {
+            create: {
+              everything: body.permission.everything && body.permission.everything,
+              project: body.permission.project && body.permission.project,
+              message: body.permission.message && body.permission.message,
+              task: body.permission.task && body.permission.task,
+              todo: body.permission.todo && body.permission.todo,
+              suggestion: body.permission.suggestion && body.permission.suggestion,
+              file: body.permission.file && body.permission.file,
+              announcement: body.permission.announcement && body.permission.announcement,
+              ticket: body.permission.ticket && body.permission.ticket,
+            },
+          },
         },
       })
       response.status(201).json(postman(201))
