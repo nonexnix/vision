@@ -238,6 +238,48 @@ const useClientStore = create<IUseClientStore>((set, get) => ({
         set({ loader: !get().loader })
       },
     },
+    permission: { 
+      project: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      message: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      task: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      todo: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      suggestion: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      file: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      announcement: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+      ticket: async (payload) => {
+        set({ loader: !get().loader })
+        await record('permission', 'UPDATE', payload)
+        set({ loader: !get().loader })
+      },
+    },
     message: {
       text: async (payload) => {
         set({ loader: !get().loader })
