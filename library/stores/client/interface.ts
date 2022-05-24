@@ -24,7 +24,21 @@ interface ICreate {
   user: (payload: { email: string; username: string; firstName: string; lastName: string; image?: string }) => void
   member: (payload: { userId: string; projectId: string }) => void
   project: (payload: { name: string; description: string; dueAt: string; userId: string }) => void
-  role: (payload: { name: string; description: string; projectId: string }) => void
+  role: (payload: {
+    name: string
+    description: string
+    projectId: string
+    permission: {
+      project: boolean
+      message: boolean
+      task: boolean
+      todo: boolean
+      suggestion: boolean
+      file: boolean
+      announcement: boolean
+      ticket: boolean
+    }
+  }) => void
   authorization: (payload: { memberId: string; roleId: string }) => void
   message: (payload: { text: string; memberId: string; projectId: string }) => void
   reaction: (payload: { emoji: TEmoji; memberId: string; messageId: string }) => void
@@ -112,6 +126,16 @@ interface IUpdate {
   role: {
     name: (payload: { id: string; key: 'name'; value: string }) => void
     description: (payload: { id: string; key: 'description'; value: string }) => void
+  }
+  permission: {
+    project: (payload: { id: string; key: 'project'; value: boolean }) => void
+    message: (payload: { id: string; key: 'message'; value: boolean }) => void
+    task: (payload: { id: string; key: 'task'; value: boolean }) => void
+    todo: (payload: { id: string; key: 'todo'; value: boolean }) => void
+    suggestion: (payload: { id: string; key: 'suggestion'; value: boolean }) => void
+    file: (payload: { id: string; key: 'file'; value: boolean }) => void
+    announcement: (payload: { id: string; key: 'announcement'; value: boolean }) => void
+    ticket: (payload: { id: string; key: 'ticket'; value: boolean }) => void
   }
   message: {
     text: (payload: { id: string; key: 'text'; value: string }) => void
