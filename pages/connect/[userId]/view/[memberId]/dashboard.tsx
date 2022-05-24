@@ -31,7 +31,7 @@ const Dashboard: NextPage<IProps> = ({ initialUser, initialMember, initialProjec
 
   if (!ready) return <></>
 
-  console.log('Dashoard Rendered')
+  console.log('Dashoard Rendered', initialProject)
 
   return (
     <Foundation title="Dashboard">
@@ -91,6 +91,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const project = await prisma.project.findUnique({
     where: { id: member?.projectId },
     include: {
+      roles: {
+        include: {
+          permission: true,
+        },
+      },
       members: true,
       tasks: true,
       suggestions: true,
