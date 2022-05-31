@@ -1,4 +1,13 @@
-import { IAnnouncement, IMember, IMessage, IParticipant, IProject, ISuggestion, ITask, ITodo } from '../../schemas/interfaces'
+import {
+  IAnnouncement,
+  IMember,
+  IMessage,
+  IParticipant,
+  IProject,
+  ISuggestion,
+  ITask,
+  ITodo,
+} from '../../schemas/interfaces'
 import phase from '../../utilities/phase'
 import moment from 'moment'
 import IFile from '../../schemas/interfaces/file'
@@ -48,6 +57,7 @@ const placeholder: IPlaceholder = {
     dueAt: '',
     memberId: '',
     projectId: '',
+    participants: [],
   },
   todo: {
     id: '',
@@ -60,6 +70,7 @@ const placeholder: IPlaceholder = {
     dueAt: '',
     memberId: '',
     taskId: '',
+    participants: [],
   },
   suggestion: {
     id: '',
@@ -71,6 +82,7 @@ const placeholder: IPlaceholder = {
     updatedAt: phase(moment().format(), 'iso'),
     memberId: '',
     projectId: '',
+    participants: [],
   },
   file: {
     id: '',
@@ -84,6 +96,7 @@ const placeholder: IPlaceholder = {
     updatedAt: phase(moment().format(), 'iso'),
     memberId: '',
     projectId: '',
+    participants: [],
   },
   announcement: {
     id: '',
@@ -93,8 +106,9 @@ const placeholder: IPlaceholder = {
     updatedAt: phase(moment().format(), 'iso'),
     memberId: '',
     projectId: '',
+    participants: [],
   },
-  assign: []
+  assign: [],
 }
 
 export default placeholder
