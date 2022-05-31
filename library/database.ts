@@ -4,13 +4,13 @@ declare global {
   var prisma: PrismaClient
 }
 
-let prisma: PrismaClient
+let database: PrismaClient
 
 if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient()
+  database = new PrismaClient()
 } else {
   if (!global.prisma) global.prisma = new PrismaClient()
-  prisma = global.prisma
+  database = global.prisma
 }
 
-export default prisma
+export default database
