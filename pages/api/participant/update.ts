@@ -10,7 +10,7 @@ const handler: THandler = async (request, response) => {
     const body = JSON.parse(request.body)
     const value = body.key === 'dueAt' ? phase(body.value, 'iso') : body.value
     try {
-      await prisma.file.update({
+      await prisma.participant.update({
         where: { id: body.id },
         data: { [body.key]: value },
       })
