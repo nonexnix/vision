@@ -12,7 +12,7 @@ interface IAnnouncement {
   memberId: string
   project?: IProject
   projectId: string
-  participants?: IParticipant
+  participants?: IParticipant[]
 }
 
 export default IAnnouncement

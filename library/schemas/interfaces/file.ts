@@ -17,7 +17,7 @@ interface IFile {
   memberId: string
   project?: IProject
   projectId: string
-  participants?: IParticipant
+  participants?: IParticipant[]
 }
 
 export default IFile
