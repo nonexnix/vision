@@ -25,7 +25,11 @@ const Home = ({ users }: any) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const users = await database.user.findMany()
+  const users = await database.user.findMany({
+    include: {
+      members: true,
+    },
+  })
 
   return {
     props: {
