@@ -1,4 +1,4 @@
-import type { Emoji, Mark, Priority, Status, Token } from '@prisma/client'
+import { Emoji, Mark, Priority, Status, Token } from '@prisma/client'
 
 export type Announcement = {
   id: string
