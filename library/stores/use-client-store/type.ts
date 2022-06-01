@@ -7,10 +7,10 @@ type UseClientStore = {
   messages: Prisma.MessageGetPayload<typeof message>[]
   read: (
     payload:
-      | { key: 'user'; value: Prisma.UserArgs }
-      | { key: 'member'; value: Prisma.MemberArgs }
-      | { key: 'project'; value: Prisma.ProjectArgs }
-      | { key: 'messages'; value: Prisma.MessageArgs[] }
+      | { key: 'user'; value: Prisma.UserGetPayload<typeof user> }
+      | { key: 'member'; value: Prisma.MemberGetPayload<typeof member> }
+      | { key: 'project'; value: Prisma.ProjectGetPayload<typeof project> }
+      | { key: 'messages'; value: Prisma.MessageGetPayload<typeof message>[] }
   ) => void
   update: {
     user: (
@@ -147,8 +147,8 @@ const message = Prisma.validator<Prisma.MessageArgs>()({
   include: {
     member: {
       include: {
-        user: true
-      }
-    }
-  }
+        user: true,
+      },
+    },
+  },
 })
