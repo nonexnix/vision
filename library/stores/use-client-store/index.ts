@@ -1,5 +1,20 @@
+import { Prisma } from '@prisma/client'
 import create from 'zustand'
-import UseClientStore from './schema'
+import { member, message, project, user } from './model'
+
+type UseClientStore = {
+  user: Prisma.UserGetPayload<typeof user>
+  member: Prisma.MemberGetPayload<typeof member>
+  project: Prisma.ProjectGetPayload<typeof project>
+  messages: Prisma.MessageGetPayload<typeof message>[]
+  read: (
+    payload:
+      | { key: 'user'; value: Prisma.UserGetPayload<typeof user> }
+      | { key: 'member'; value: Prisma.MemberGetPayload<typeof member> }
+      | { key: 'project'; value: Prisma.ProjectGetPayload<typeof project> }
+      | { key: 'messages'; value: Prisma.MessageGetPayload<typeof message>[] }
+  ) => void
+}
 
 const useClientStore = create<UseClientStore>((set, get) => ({
   user: {
