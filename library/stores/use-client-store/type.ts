@@ -14,30 +14,18 @@ type UseClientStore = {
   ) => void
 }
 
+export default UseClientStore
+
 const user = Prisma.validator<Prisma.UserArgs>()({
   include: {
     members: {
       include: {
-        project: {
-          include: {
-            members: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        project: { include: { members: { include: { user: true } } } },
       },
     },
-    tickets: {
-      include: {
-        project: true,
-      },
-    },
+    tickets: { include: { project: true } },
   },
 })
-
-export default UseClientStore
 
 const member = Prisma.validator<Prisma.MemberArgs>()({})
 
@@ -46,112 +34,45 @@ const project = Prisma.validator<Prisma.ProjectArgs>()({
     members: {
       include: {
         user: true,
-        authorizations: {
-          include: {
-            member: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        authorizations: { include: { member: { include: { user: true } } } },
       },
     },
     roles: {
       include: {
         permission: true,
-        authorizations: {
-          include: {
-            member: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        authorizations: { include: { member: { include: { user: true } } } },
       },
     },
     tasks: {
       include: {
         todos: {
           include: {
-            participants: {
-              include: {
-                member: {
-                  include: {
-                    user: true,
-                  },
-                },
-              },
-            },
+            participants: { include: { member: { include: { user: true } } } },
           },
         },
-        participants: {
-          include: {
-            member: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        participants: { include: { member: { include: { user: true } } } },
       },
     },
     suggestions: {
       include: {
         votes: true,
-        participants: {
-          include: {
-            member: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        participants: { include: { member: { include: { user: true } } } },
       },
     },
     files: {
       include: {
-        participants: {
-          include: {
-            member: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        participants: { include: { member: { include: { user: true } } } },
       },
     },
     announcements: {
       include: {
-        participants: {
-          include: {
-            member: {
-              include: {
-                user: true,
-              },
-            },
-          },
-        },
+        participants: { include: { member: { include: { user: true } } } },
       },
     },
-    tickets: {
-      include: {
-        user: true,
-      },
-    },
+    tickets: { include: { user: true } },
   },
 })
 
 const message = Prisma.validator<Prisma.MessageArgs>()({
-  include: {
-    member: {
-      include: {
-        user: true,
-      },
-    },
-    reactions: true,
-  },
+  include: { member: { include: { user: true } }, reactions: true },
 })
