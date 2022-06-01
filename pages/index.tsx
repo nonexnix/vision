@@ -46,7 +46,36 @@ export default Home
 export const getServerSideProps: GetServerSideProps = async () => {
   const users = await database.user.findMany({
     include: {
-      members: true,
+      members: {
+        select: {
+          project: {
+            select: {
+              _count: {
+                select: {
+                  tasks: true,
+                  roles: true,
+                },
+              },
+              id: true,
+              name: true,
+              description: true,
+              code: true,
+              over: true,
+              dueAt: true,
+              members: {
+                select: {
+                  user: {
+                    select: {
+                      username: true,
+                      image: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
   })
 

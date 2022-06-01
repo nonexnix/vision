@@ -19,11 +19,35 @@ export default UseClientStore
 const user = Prisma.validator<Prisma.UserArgs>()({
   include: {
     members: {
-      include: {
-        project: { include: { members: { include: { user: true } } } },
+      select: {
+        project: {
+          select: {
+            _count: {
+              select: {
+                tasks: true,
+                roles: true,
+              },
+            },
+            id: true,
+            name: true,
+            description: true,
+            code: true,
+            over: true,
+            dueAt: true,
+            members: {
+              select: {
+                user: {
+                  select: {
+                    username: true,
+                    image: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     },
-    tickets: { include: { project: true } },
   },
 })
 
