@@ -12,11 +12,11 @@ const Home = ({ users }: any) => {
     (previous, current) => compareState(previous, current)
   )
 
-  const changeUsername = useClientStore((state) => state.update.user)
+  // const changeUsername = useClientStore((state) => state.update.user)
 
-  const handleChangeName = () => {
-    changeUsername({ key: 'username', value: 'georgeeees' })
-  }
+  // const handleChangeName = () => {
+  //   changeUsername({ key: 'username', value: 'georgeeees' })
+  // }
 
   useEffect(() => {
     useClientStore.getState().read({ key: 'user', value: users[2] })
@@ -36,7 +36,7 @@ const Home = ({ users }: any) => {
       </Head>
 
       <h1>Hello World</h1>
-      <button onClick={handleChangeName}>Change Name</button>
+      {/* <button onClick={handleChangeName}>Change Name</button> */}
     </>
   )
 }
