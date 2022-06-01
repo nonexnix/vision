@@ -1,5 +1,5 @@
 import create from 'zustand'
-import UseClientStore from './type'
+import UseClientStore from './schema'
 
 const useClientStore = create<UseClientStore>((set, get) => ({
   user: {
@@ -43,7 +43,7 @@ const useClientStore = create<UseClientStore>((set, get) => ({
     tickets: [],
   },
   messages: [],
-  read: (payload) => set({ [payload.key]: payload.value }),
+  read: ({ key, value }) => set({ [key]: value }),
 }))
 
 export default useClientStore
