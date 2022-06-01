@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const Home = ({ users }: any) => {
+const Home = () => {
   return (
     <>
       <Head>
