@@ -6,6 +6,8 @@ type Data =
   | Prisma.ProjectInclude
   | Prisma.MessageInclude[]
 
-const serializeData = (data: Data | User[]) => JSON.parse(JSON.stringify(data))
+const serializeData = (data: Data | User[]): Data | User[] => {
+  return JSON.parse(JSON.stringify(data))
+}
 
 export default serializeData
