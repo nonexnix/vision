@@ -83,6 +83,28 @@ type UseClientStore = {
         | { id: string; key: 'description'; value: string }
     ) => void
   }
+  delete: {
+    member: (payload: { id: string }) => void
+    role: (payload: { id: string }) => void
+    authorization: (payload: { id: string }) => void
+    message: (payload: { id: string }) => void
+    reaction: (payload: { id: string }) => void
+    task: (payload: { id: string }) => void
+    todo: (payload: { id: string }) => void
+    suggestion: (payload: { id: string }) => void
+    vote: (payload: { id: string }) => void
+    file: (payload: { id: string }) => void
+    announcement: (payload: { id: string }) => void
+    participant: (
+      payload:
+        | { id: string; key: 'tasks' }
+        | { id: string; key: 'todos' }
+        | { id: string; key: 'suggestions' }
+        | { id: string; key: 'files' }
+        | { id: string; key: 'announcements' }
+    ) => void
+    ticket: (payload: { id: string }) => void
+  }
 }
 
 const user = Prisma.validator<Prisma.UserArgs>()({
@@ -100,15 +122,46 @@ const user = Prisma.validator<Prisma.UserArgs>()({
         },
       },
     },
+    tickets: {
+      include: {
+        project: true,
+      },
+    },
   },
 })
 
 export default UseClientStore
 
-const member = Prisma.validator<Prisma.MemberArgs>()({})
+const member = Prisma.validator<Prisma.MemberArgs>()({
+  include: {
+    authorizations: {
+      include: {
+        role: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+    },
+  },
+})
 
 const project = Prisma.validator<Prisma.ProjectArgs>()({
   include: {
+    members: {
+      include: {
+        user: true,
+        authorizations: {
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
+      },
+    },
     roles: {
       include: {
         permission: true,
@@ -125,16 +178,70 @@ const project = Prisma.validator<Prisma.ProjectArgs>()({
     },
     tasks: {
       include: {
-        todos: true,
+        todos: {
+          include: {
+            participants: {
+              include: {
+                member: {
+                  include: {
+                    user: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        participants: {
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
       },
     },
     suggestions: {
       include: {
         votes: true,
+        participants: {
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
       },
     },
-    files: true,
-    announcements: true,
+    files: {
+      include: {
+        participants: {
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
+      },
+    },
+    announcements: {
+      include: {
+        participants: {
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
+      },
+    },
     tickets: {
       include: {
         user: true,
@@ -150,5 +257,6 @@ const message = Prisma.validator<Prisma.MessageArgs>()({
         user: true,
       },
     },
+    reactions: true,
   },
 })
