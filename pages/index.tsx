@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import database from '../library/database'
 import compareState from '../library/helpers/compare-state'
 import serializeData from '../library/helpers/serialize-data'
@@ -8,8 +8,8 @@ import useClientStore from '../library/stores/use-client-store'
 
 const Home = ({ users }: any) => {
   const user = useClientStore(
-    (state) => state.user,
-    (oldData, newData) => compareState(oldData, newData)
+    ({ user }) => user,
+    (previous, current) => compareState(previous, current)
   )
 
   const changeUsername = useClientStore((state) => state.update.user)
