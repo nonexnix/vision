@@ -1,9 +1,9 @@
 import type { Emoji, Mark, Priority, Status, Token } from '@prisma/client'
 
-export type Announcement<D = Date> = {
+export type Announcement<D = string> = {
   id: string
   name: string
-  // description: string
+  description: string
   createdAt: D
   updatedAt: D
   member?: Member
@@ -21,7 +21,7 @@ export type Authorization = {
   roleId: string
 }
 
-export type File<D = Date> = {
+export type File<D = string> = {
   id: string
   name: string
   description: string
@@ -38,7 +38,7 @@ export type File<D = Date> = {
   participants?: Participant[]
 }
 
-export type Member<D = Date> = {
+export type Member<D = string> = {
   id: string
   rating: number
   active: boolean
@@ -60,7 +60,7 @@ export type Member<D = Date> = {
   participants?: Participant[]
 }
 
-export type Message<D = Date> = {
+export type Message<D = string> = {
   id: string
   text: string
   createdAt: D
@@ -104,7 +104,7 @@ export type Permission = {
   roleId?: string
 }
 
-export type Project<D = Date> = {
+export type Project<D = string> = {
   id: string
   name: string
   description: string
@@ -147,7 +147,7 @@ export type Role = {
   authorizations?: Authorization[]
 }
 
-export type Suggestion<D = Date> = {
+export type Suggestion<D = string> = {
   id: string
   name: string
   description: string
@@ -163,7 +163,7 @@ export type Suggestion<D = Date> = {
   votes?: Vote[]
 }
 
-export type Task<D = Date> = {
+export type Task<D = string> = {
   id: string
   name: string
   description: string
@@ -191,7 +191,7 @@ export type Ticket = {
   projectId: string
 }
 
-export type Todo<D = Date> = {
+export type Todo<D = string> = {
   id: string
   name: string
   description: string
@@ -207,7 +207,7 @@ export type Todo<D = Date> = {
   participants?: Participant[]
 }
 
-export type User<D = Date> = {
+export type User<D = string> = {
   id: string
   email: string
   username: string
