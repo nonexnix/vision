@@ -16,29 +16,32 @@ type UseClientStore = {
 
 export default UseClientStore
 
+type PrimaryKey = string
+type ForeignKey = string
+
 export type Announcement<D = string> = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   createdAt: D
   updatedAt: D
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   participants?: Participant[]
 }
 
 export type Authorization = {
-  id: string
+  id: PrimaryKey
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   role?: Role
-  roleId: string
+  roleId: ForeignKey
 }
 
 export type File<D = string> = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   extension: string
@@ -48,22 +51,22 @@ export type File<D = string> = {
   createdAt: D
   updatedAt: D
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   participants?: Participant[]
 }
 
 export type Member<D = string> = {
-  id: string
+  id: PrimaryKey
   rating: number
   active: boolean
   createdAt: D
   updatedAt: D
   user?: User
-  userId: string
+  userId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   authorizations?: Authorization[]
   messages?: Message[]
   reactions?: Reaction[]
@@ -77,36 +80,36 @@ export type Member<D = string> = {
 }
 
 export type Message<D = string> = {
-  id: string
+  id: PrimaryKey
   text: string
   createdAt: D
   updatedAt: D
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   reactions?: Reaction[]
 }
 
 export type Participant = {
-  id: string
+  id: PrimaryKey
   access: boolean
   member?: Member
   memberId: string
   task?: Task
-  taskId?: string
+  taskId?: ForeignKey
   todo?: Todo
-  todoId?: string
+  todoId?: ForeignKey
   suggestion?: Suggestion
-  suggestionId?: string
+  suggestionId?: ForeignKey
   file?: File
-  fileId?: string
+  fileId?: ForeignKey
   announcement?: Announcement
-  announcementId?: string
+  announcementId?: ForeignKey
 }
 
 export type Permission = {
-  id: string
+  id: PrimaryKey
   everything: boolean
   project: boolean
   message: boolean
@@ -117,11 +120,11 @@ export type Permission = {
   announcement: boolean
   ticket: boolean
   role?: Role
-  roleId?: string
+  roleId?: ForeignKey
 }
 
 export type Project<D = string> = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   code: string
@@ -131,7 +134,7 @@ export type Project<D = string> = {
   updatedAt: D
   dueAt: D
   user?: User
-  userId: string
+  userId: ForeignKey
   members?: Member[]
   roles?: Role[]
   messages?: Message[]
@@ -143,28 +146,28 @@ export type Project<D = string> = {
 }
 
 export type Reaction = {
-  id: string
+  id: PrimaryKey
   emoji: Emoji
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   message?: Message
-  messageId: string
+  messageId: ForeignKey
 }
 
 export type Role = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   permanent: boolean
   constant: boolean
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   permission?: Permission
   authorizations?: Authorization[]
 }
 
 export type Suggestion<D = string> = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   rate: number
@@ -172,15 +175,15 @@ export type Suggestion<D = string> = {
   createdAt: D
   updatedAt: D
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   participants?: Participant[]
   votes?: Vote[]
 }
 
 export type Task<D = string> = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   rate: number
@@ -190,25 +193,25 @@ export type Task<D = string> = {
   updatedAt: D
   dueAt: D
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
   todos?: Todo[]
   participants?: Participant[]
 }
 
 export type Ticket = {
-  id: string
+  id: PrimaryKey
   code: string
   token: Token
   user?: User
-  userId: string
+  userId: ForeignKey
   project?: Project
-  projectId: string
+  projectId: ForeignKey
 }
 
 export type Todo<D = string> = {
-  id: string
+  id: PrimaryKey
   name: string
   description: string
   priority: Priority
@@ -217,14 +220,14 @@ export type Todo<D = string> = {
   updatedAt: D
   dueAt: D
   member?: Member
-  memberId: string
+  memberId: ForeignKey
   task?: Task
-  taskId: string
+  taskId: ForeignKey
   participants?: Participant[]
 }
 
 export type User<D = string> = {
-  id: string
+  id: PrimaryKey
   email: string
   username: string
   firstName: string
@@ -238,10 +241,10 @@ export type User<D = string> = {
 }
 
 export type Vote = {
-  id: string
+  id: PrimaryKey
   mark: Mark
   member: Member
-  memberId: string
+  memberId: ForeignKey
   suggestion: Suggestion
-  suggestionId: string
+  suggestionId: ForeignKey
 }
