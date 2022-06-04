@@ -1,11 +1,11 @@
 import type { Emoji, Mark, Priority, Status, Token } from '@prisma/client'
 
-export type Announcement = {
+export type Announcement<D = Date> = {
   id: string
   name: string
-  description: string
-  createdAt: string
-  updatedAt: string
+  // description: string
+  createdAt: D
+  updatedAt: D
   member?: Member
   memberId: string
   project?: Project
@@ -21,7 +21,7 @@ export type Authorization = {
   roleId: string
 }
 
-export type File = {
+export type File<D = Date> = {
   id: string
   name: string
   description: string
@@ -29,8 +29,8 @@ export type File = {
   path: string
   rate: number
   status: Status
-  createdAt: string
-  updatedAt: string
+  createdAt: D
+  updatedAt: D
   member?: Member
   memberId: string
   project?: Project
@@ -38,12 +38,12 @@ export type File = {
   participants?: Participant[]
 }
 
-export type Member = {
+export type Member<D = Date> = {
   id: string
   rating: number
   active: boolean
-  createdAt: string
-  updatedAt: string
+  createdAt: D
+  updatedAt: D
   user?: User
   userId: string
   project?: Project
@@ -60,11 +60,11 @@ export type Member = {
   participants?: Participant[]
 }
 
-export type Message = {
+export type Message<D = Date> = {
   id: string
   text: string
-  createdAt: string
-  updatedAt: string
+  createdAt: D
+  updatedAt: D
   member?: Member
   memberId: string
   project?: Project
@@ -104,16 +104,16 @@ export type Permission = {
   roleId?: string
 }
 
-export type Project = {
+export type Project<D = Date> = {
   id: string
   name: string
   description: string
   code: string
   preserve: boolean
   over: boolean
-  createdAt: string
-  updatedAt: string
-  dueAt: string
+  createdAt: D
+  updatedAt: D
+  dueAt: D
   user?: User
   userId: string
   members?: Member[]
@@ -147,14 +147,14 @@ export type Role = {
   authorizations?: Authorization[]
 }
 
-export type Suggestion = {
+export type Suggestion<D = Date> = {
   id: string
   name: string
   description: string
   rate: number
   status: Status
-  createdAt: string
-  updatedAt: string
+  createdAt: D
+  updatedAt: D
   member?: Member
   memberId: string
   project?: Project
@@ -163,16 +163,16 @@ export type Suggestion = {
   votes?: Vote[]
 }
 
-export type Task = {
+export type Task<D = Date> = {
   id: string
   name: string
   description: string
   rate: number
   priority: Priority
   over: boolean
-  createdAt: string
-  updatedAt: string
-  dueAt: string
+  createdAt: D
+  updatedAt: D
+  dueAt: D
   member?: Member
   memberId: string
   project?: Project
@@ -191,15 +191,15 @@ export type Ticket = {
   projectId: string
 }
 
-export type Todo = {
+export type Todo<D = Date> = {
   id: string
   name: string
   description: string
   priority: Priority
   over: boolean
-  createdAt: string
-  updatedAt: string
-  dueAt: string
+  createdAt: D
+  updatedAt: D
+  dueAt: D
   member?: Member
   memberId: string
   task?: Task
@@ -207,15 +207,15 @@ export type Todo = {
   participants?: Participant[]
 }
 
-export type User = {
+export type User<D = Date> = {
   id: string
   email: string
   username: string
   firstName: string
   lastName: string
   image: string
-  createdAt: string
-  updatedAt: string
+  createdAt: D
+  updatedAt: D
   members?: Member[]
   projects?: Project[]
   tickets?: Ticket[]
