@@ -1,19 +1,5 @@
 import create from 'zustand'
-import { Member, Message, Project, User } from '../types/client'
-
-type UseClientStore = {
-  user: User
-  member: Member
-  project: Project
-  messages: Message[]
-  read: (
-    payload:
-      | { key: 'user'; value: User }
-      | { key: 'member'; value: Member }
-      | { key: 'project'; value: Project }
-      | { key: 'messages'; value: Message[] }
-  ) => void
-}
+import type UseClientStore from './types'
 
 const useClientStore = create<UseClientStore>((set, get) => ({
   user: {

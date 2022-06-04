@@ -1,5 +1,21 @@
 import type { Emoji, Mark, Priority, Status, Token } from '@prisma/client'
 
+type UseClientStore = {
+  user: User
+  member: Member
+  project: Project
+  messages: Message[]
+  read: (
+    payload:
+      | { key: 'user'; value: User }
+      | { key: 'member'; value: Member }
+      | { key: 'project'; value: Project }
+      | { key: 'messages'; value: Message[] }
+  ) => void
+}
+
+export default UseClientStore
+
 export type Announcement<D = string> = {
   id: string
   name: string
