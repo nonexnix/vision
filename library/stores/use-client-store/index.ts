@@ -1,5 +1,5 @@
 import create from 'zustand'
-import type UseClientStore from './types'
+import type UseClientStore from './schema'
 
 const useClientStore = create<UseClientStore>((set, get) => ({
   user: {
